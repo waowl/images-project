@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div>
             <h4>Login with Facebook</h4>
             <?= yii\authclient\widgets\AuthChoice::widget([
-                'baseAuthUrl' => ['site/auth'],
+                'baseAuthUrl' => ['/user/default/auth'],
                 'popupMode' => false,
             ]) ?>
         </div>
