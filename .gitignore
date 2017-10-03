@@ -5,7 +5,7 @@
 
 # phpstorm project files
 .idea
-
+gulp
 # netbeans project files
 nbproject
 

@@ -20,6 +20,10 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property string $about
+ * @property integer $type
+ * @property string $nickname
+ * @property string $picture
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -185,5 +189,68 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNickname()
+    {
+       return ($this->nickname) ?  $this->nickname : $this->id;
+    }
+
+    public function follow(User $user)
+    {
+        $k1 = "user:{$this->getId()}:subscriptions";
+        $k2 = "user:{$user->getId()}:followers";
+
+        $redis = Yii::$app->redis;
+        $redis->sadd($k1, $user->getId());
+        $redis->sadd($k2, $this->getId());
+    }
+
+    public function unFollow(User $user)
+    {
+        $k1 = "user:{$this->getId()}:subscriptions";
+        $k2 = "user:{$user->getId()}:followers";
+
+        $redis = Yii::$app->redis;
+        $redis->srem($k1, $user->getId());
+        $redis->srem($k2, $this->getId());
+    }
+
+    /**
+     * @param string $list
+     * @return mixed
+     */
+    public function getSubscriptionOrFollowers($list)
+    {
+        $redis = Yii::$app->redis;
+        $key = "user:{$this->getId()}:{$list}";
+        $ids = $redis->smembers($key);
+        return  User::find()->select('id,username, nickname')->where(['id' => $ids])
+            ->orderBy('username')->asArray()->all();
+    }
+
+    /**
+     * @param string $list
+     * @return mixed
+     */
+    public function getListCount($list)
+    {
+        $redis = Yii::$app->redis;
+        return $redis->scard("user:{$this->getId()}:{$list}");
+    }
+
+    public function getMutualSubscriptons(User $user)
+    {
+        $k1 = "user:{$this->getId()}:subscriptions";
+        $k2 = "user:{$user->getId()}:followers";
+
+        $redis =Yii::$app->redis;
+
+        $ids = $redis->sinter($k1, $k2);
+        return   User::find()->select('id,username, nickname')->where(['id' => $ids])
+            ->orderBy('username')->asArray()->all();
     }
 }
