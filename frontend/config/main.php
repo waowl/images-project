@@ -44,6 +44,9 @@ return [
                 ],
             ],
         ],
+        'storage' => [
+          'class' => 'frontend\components\Storage'
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

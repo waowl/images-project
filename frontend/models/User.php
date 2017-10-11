@@ -1,7 +1,9 @@
 <?php
+
 namespace frontend\models;
 
 use Yii;
+use yii\base\Exception;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -117,7 +119,7 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
@@ -196,11 +198,15 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getNickname()
     {
-       return ($this->nickname) ?  $this->nickname : $this->id;
+        return ($this->nickname) ? $this->nickname : $this->id;
     }
 
     public function follow(User $user)
     {
+        if ($this->getId() === $user->getId()) {
+            throw new Exception('Подписка на самого себя невозможна!');
+        }
+
         $k1 = "user:{$this->getId()}:subscriptions";
         $k2 = "user:{$user->getId()}:followers";
 
@@ -220,16 +226,27 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param string $list
+     *
      * @return mixed
      */
-    public function getSubscriptionOrFollowers($list)
+    public function getFollowers()
     {
         $redis = Yii::$app->redis;
-        $key = "user:{$this->getId()}:{$list}";
+        $key = "user:{$this->getId()}:followers";
         $ids = $redis->smembers($key);
-        return  User::find()->select('id,username, nickname')->where(['id' => $ids])
-            ->orderBy('username')->asArray()->all();
+        return User::find()->select('id,username, nickname')->where(['id' => $ids])->orderBy('username')->asArray()->all();
+    }
+
+    /**
+     *
+     * @return mixed
+     */
+    public function getSubscriptions()
+    {
+        $redis = Yii::$app->redis;
+        $key = "user:{$this->getId()}:subscriptions";
+        $ids = $redis->smembers($key);
+        return User::find()->select('id,username, nickname')->where(['id' => $ids])->orderBy('username')->asArray()->all();
     }
 
     /**
@@ -247,10 +264,32 @@ class User extends ActiveRecord implements IdentityInterface
         $k1 = "user:{$this->getId()}:subscriptions";
         $k2 = "user:{$user->getId()}:followers";
 
-        $redis =Yii::$app->redis;
+        $redis = Yii::$app->redis;
 
         $ids = $redis->sinter($k1, $k2);
-        return   User::find()->select('id,username, nickname')->where(['id' => $ids])
-            ->orderBy('username')->asArray()->all();
+        return User::find()->select('id,username, nickname')->where(['id' => $ids])->orderBy('username')->asArray()->all();
+    }
+
+    /**
+     * @param User $user
+     * @return boolean
+     */
+    public function checkSubscription(User $user)
+    {
+        $k1 = "user:{$this->getId()}:subscriptions";
+        $redis = Yii::$app->redis;
+        return $redis->sismember($k1, $user->getId());
+    }
+
+    /**
+     * get profile picture
+     * @return  string
+    */
+    public function getPicture()
+    {
+        if ($this->picture)
+        {
+            return Yii::$app->storage->getFile($this->picture);
+        }
     }
 }

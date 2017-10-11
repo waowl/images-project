@@ -6,6 +6,7 @@
 # phpstorm project files
 .idea
 gulp
+frontend/web/uploads
 # netbeans project files
 nbproject
 
@@ -33,3 +34,7 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+/frontend/web/uploads/
+!/frontend/web/uploads/
+frontend/web/uploads/
+node_modules/

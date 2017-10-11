@@ -10,20 +10,27 @@ namespace frontend\modules\user\controllers;
 
 
 use frontend\models\User;
+use frontend\modules\user\models\form\PictureForm;
+use PHPUnit\Runner\Exception;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class ProfileController extends Controller
 {
     public function actionView($nickname)
     {
-        //TODO:доделать отображнение
         $currentUser = Yii::$app->user->identity;
-        return $this->render('view', [
-            'user' => $this->findUser($nickname),
-            'currentUser' => $currentUser
-        ]);
+        if ($currentUser)  {
+            $picture = new PictureForm();
+            return $this->render('view', [
+                'user' => $this->findUser($nickname),
+                'currentUser' => $currentUser,
+                'picture' => $picture
+            ]);
+        }
+        throw new NotFoundHttpException();
     }
 
     public function actionSubscribe($id)
@@ -35,9 +42,11 @@ class ProfileController extends Controller
         $currentUser = Yii::$app->user->identity;
         $user = $this->findUserById($id);
 
-
-        $currentUser->follow($user);
-
+        try {
+            $currentUser->follow($user);
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
         return $this->redirect(['/user/profile/view/', 'nickname'=> $user->getNickname()]);
     }
 
@@ -84,5 +93,17 @@ class ProfileController extends Controller
         throw new NotFoundHttpException();
     }
 
+    public function actionUploadPicture()
+    {
+        $model = new PictureForm();
+        $model->picture = UploadedFile::getInstance($model, 'picture');
+        if ($model->validate()) {
+            $user = Yii::$app->user->identity;
+            $user->picture = Yii::$app->storage->saveUploadedFile($model->picture);
+            if ($user->save(false,['picture'])) {
+                print_r($user->attributes);
+            }
+        }
+    }
 
 }
