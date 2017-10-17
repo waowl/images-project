@@ -15,6 +15,7 @@ use PHPUnit\Runner\Exception;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 class ProfileController extends Controller
@@ -95,15 +96,40 @@ class ProfileController extends Controller
 
     public function actionUploadPicture()
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
         $model = new PictureForm();
         $model->picture = UploadedFile::getInstance($model, 'picture');
+
         if ($model->validate()) {
             $user = Yii::$app->user->identity;
             $user->picture = Yii::$app->storage->saveUploadedFile($model->picture);
             if ($user->save(false,['picture'])) {
-                print_r($user->attributes);
+                return [
+                    'success' => true,
+                    'picture' => Yii::$app->storage->getFile($user->picture)
+                ];
             }
         }
+            return [
+                'success' => false,
+                'errors' => $model->getErrors()
+            ];
+    }
+    public function actionDeletePicture()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/user/default/login');
+        }
+
+        $currentUser = Yii::$app->user->identity;
+
+        if ($currentUser->deletePicture()) {
+            Yii::$app->session->setFlash('success', 'Picture deleted');
+        } else {
+            Yii::$app->session->setFlash('danger', 'Error occured');
+        }
+        return $this->redirect(['/user/profile/view', 'nickname' => $currentUser->getNickname()]);
     }
 
 }

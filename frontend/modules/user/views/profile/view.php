@@ -17,8 +17,10 @@ use dosamigos\fileupload\FileUpload;
     <p><?= HTMLPurifier::process($user->about) ?></p>
     <hr>
     <div>
-        <img style="width: 400px; height: auto" src="<?= $user->getPicture() ?>" alt="">
+        <img class="avatar" style="width: 150px; height: auto; border-radius: 50%" src="<?= $user->getPicture() ?>" alt="">
     </div>
+    <div class="alert alert-success alert-dismissable hidden" id="avatar-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Фото обновлено</div>
+    <div class="alert alert-danger alert-dismissable hidden" id="avatar-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
     <?= FileUpload::widget([
         'model' => $picture,
         'attribute' => 'picture',
@@ -31,15 +33,22 @@ use dosamigos\fileupload\FileUpload;
         // see: https://github.com/blueimp/jQuery-File-Upload/wiki/Options#processing-callback-options
         'clientEvents' => [
             'fileuploaddone' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
+            console.log(data.result.success)
+                               if (data.result.success) {
+                                    $("#avatar-danger").addClass("hidden")
+                                    $("#avatar-success").removeClass("hidden");
+                                    $(".avatar").attr("src", data.result.picture)
+                               }else {
+                                    $("#avatar-success").addClass("hidden");
+                                     $("#avatar-danger").html( data.result.errors.picture)
+                                    $("#avatar-danger").removeClass("hidden")
+                               }
                             }',
             'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
                             }',
         ],
     ]); ?>
+    <a href="<?= Url::to('/user/profile/delete-picture')?> " class="btn btn-danger">Удалить картинку</a>
     <?php if ($currentUser->getId() !== $user->getId()): ?>
         <?php if (!$currentUser->checkSubscription($user)): ?>
             <a href="<?= Url::to(['/user/profile/subscribe/', 'id' => $user->getId()]) ?>"

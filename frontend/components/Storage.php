@@ -20,12 +20,11 @@ class Storage extends Component implements StorageInterface
     /**
      * @param \yii\web\UploadedFile $file
      */
-    public function saveUploadedFile(\yii\web\UploadedFile $file)
+    public function saveUploadedFile(UploadedFile $file)
     {
        $path = $this->preparePath($file);
 
-       if ($path && $file->saveAs($path))
-       {
+       if ($path && $file->saveAs($path)) {
            return $this->fileName;
        }
     }
@@ -71,5 +70,16 @@ class Storage extends Component implements StorageInterface
     private function getStoragePath()
     {
         return Yii::getAlias(Yii::$app->params['storagePath']);
+    }
+
+    public function deletePicture(string $filename)
+    {
+        $file = $this->getStoragePath().$filename;
+
+        if (file_exists($file)) {
+            unlink($file);
+        }
+
+        return true;
     }
 }

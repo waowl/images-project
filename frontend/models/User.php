@@ -32,6 +32,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+    const DEFAULT_AVATAR = "/img/no-img.jpg";
 
     /**
      * @inheritdoc
@@ -291,5 +292,19 @@ class User extends ActiveRecord implements IdentityInterface
         {
             return Yii::$app->storage->getFile($this->picture);
         }
+        return self::DEFAULT_AVATAR;
+    }
+
+    /**
+     * delete profile picture
+     */
+    public function deletePicture()
+    {
+        if ($this->picture && Yii::$app->storage->deletePicture($this->picture)) {
+            $this->picture = null;
+            return $this->save(false, ['picture']);
+        }
+
+        return false;
     }
 }
