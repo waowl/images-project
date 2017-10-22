@@ -49,6 +49,11 @@ class Post extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['post_id' => 'id']);
+    }
+
     public function like(User $user)
     {
         $redis = Yii::$app->redis;

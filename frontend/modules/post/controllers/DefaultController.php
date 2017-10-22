@@ -2,7 +2,10 @@
 
 namespace frontend\modules\post\controllers;
 
+use common\models\User;
+use frontend\models\Comment;
 use frontend\models\Post;
+use frontend\modules\post\models\forms\CommentForm;
 use frontend\modules\post\models\forms\PostForm;
 use Intervention\Image\Exception\NotFoundException;
 use yii\web\Response;
@@ -33,9 +36,14 @@ class DefaultController extends Controller
     public function actionView($id)
     {
         $currentUser = Yii::$app->user->identity;
+        $commentForm = new CommentForm($currentUser);
+        $post = $this->findPost($id);
+        $comments = $this->getComments($post);
         return $this->render('view', [
-           'post' =>  $this->findPost($id),
-            'currentUser' => $currentUser
+            'post' => $post,
+            'currentUser' => $currentUser,
+            'commentForm' => $commentForm,
+            'comments' => $comments
         ]);
     }
 
@@ -87,6 +95,47 @@ class DefaultController extends Controller
             'success' => true,
             'count' => $post->countLikes()
         ];
+    }
+
+    public function actionComment($id)
+    {
+        $model = new CommentForm(Yii::$app->user->identity);
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->save($id)) {
+                    Yii::$app->session->setFlash('success', 'Комментарий добавлен');
+                    return $this->redirect(['/post/' . $id]);
+                }
+            }
+        }
+    }
+
+    public function actionCommentDelete($id)
+    {
+        $comment = Comment::findOne($id);
+        if ($comment->delete()) {
+            Yii::$app->session->setFlash('success', 'Ваш комментарий  удалён');
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionCommentEdit($id)
+    {
+        $currentUser = Yii::$app->user->identity;
+        $commentForm = new CommentForm($currentUser);
+        $commentForm->attributes = Yii::$app->request->post();
+        if ($commentForm->update($id)) {
+            Yii::$app->session->setFlash('success', 'Ваш комментарий  обновлён');
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+
+    private function getComments($post)
+    {
+        return $post->comments;
     }
 
 }

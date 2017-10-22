@@ -60,7 +60,9 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'profile/<nickname:\w+>' => 'user/profile/view',
-                'post/<id:\d+>' => 'post/default/view'
+                'post/<id:\d+>' => 'post/default/view',
+                'comment/delete/<id:\d+>' => 'post/default/comment-delete',
+                'comment/edit/<id:\d+>' => 'post/default/comment-edit'
             ],
         ],
 

@@ -8,7 +8,7 @@ use yii\base\Model;
 
 class PostForm extends Model
 {
-    const MAX_DESCRIPTION_LENGHT = 1000;
+    const MAX_DESCRIPTION_LENGTH = 1000;
     public $filename;
     public $description;
     private $user;
@@ -22,7 +22,7 @@ class PostForm extends Model
                 'extensions' => ['jpg', 'png'],
                 'checkExtensionByMimeType' => true,
                 'maxSize' => $this->getMaxSize()],
-                [['description'], 'string', 'max' => self::MAX_DESCRIPTION_LENGHT]
+                [['description'], 'string', 'max' => self::MAX_DESCRIPTION_LENGTH]
 
         ];
     }
