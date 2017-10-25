@@ -8,5 +8,6 @@ return [
     'picture' => [
         'width' => 1280,
         'height' => 1024,
-    ]
+    ],
+    'feedPostsLimit' => 200
 ];

@@ -2,7 +2,7 @@ $('.comment').click(function (e) {
         var $this = $(this);
         var text;
         if (e.target.classList.contains('edit')) {
-            text = $this.find('p').text();
+            text = $this.find('.comment-body').text();
 
             var edit = $('.edit-form');
             var id = $this.attr('data-id');

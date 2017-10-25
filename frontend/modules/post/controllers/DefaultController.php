@@ -20,6 +20,9 @@ class DefaultController extends Controller
 {
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest){
+            return $this->redirect('/user/default/login');
+        }
         $model = new PostForm(Yii::$app->user->identity);
         if ($model->load(Yii::$app->request->post())) {
             $model->filename = UploadedFile::getInstance($model, 'filename');
@@ -38,7 +41,7 @@ class DefaultController extends Controller
         $currentUser = Yii::$app->user->identity;
         $commentForm = new CommentForm($currentUser);
         $post = $this->findPost($id);
-        $comments = $this->getComments($post);
+        $comments = Comment::find()->where(['post_id' => $post->id])->with('user')->all();
         return $this->render('view', [
             'post' => $post,
             'currentUser' => $currentUser,
@@ -49,8 +52,8 @@ class DefaultController extends Controller
 
     private function findPost($id)
     {
-        if ($user = Post::findOne($id)) {
-            return $user;
+        if ($post = Post::findOne($id)) {
+            return $post;
         }
         throw new NotFoundException();
     }
@@ -132,10 +135,5 @@ class DefaultController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-
-    private function getComments($post)
-    {
-        return $post->comments;
-    }
 
 }

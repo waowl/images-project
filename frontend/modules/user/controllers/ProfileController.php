@@ -31,7 +31,7 @@ class ProfileController extends Controller
                 'picture' => $picture
             ]);
         }
-        throw new NotFoundHttpException();
+        return $this->redirect('/user/default/login');
     }
 
     public function actionSubscribe($id)

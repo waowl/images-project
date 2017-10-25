@@ -21,6 +21,7 @@ use dosamigos\fileupload\FileUpload;
     </div>
     <div class="alert alert-success alert-dismissable hidden" id="avatar-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Фото обновлено</div>
     <div class="alert alert-danger alert-dismissable hidden" id="avatar-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+    <?php if ($currentUser->getId() === $user->getId()): ?>
     <?= FileUpload::widget([
         'model' => $picture,
         'attribute' => 'picture',
@@ -49,10 +50,12 @@ use dosamigos\fileupload\FileUpload;
         ],
     ]); ?>
     <a href="<?= Url::to('/user/profile/delete-picture')?> " class="btn btn-danger">Удалить картинку</a>
+    <?php endif;?>
     <?php if ($currentUser->getId() !== $user->getId()): ?>
         <?php if (!$currentUser->checkSubscription($user)): ?>
             <a href="<?= Url::to(['/user/profile/subscribe/', 'id' => $user->getId()]) ?>"
                class="btn btn-success">Подписаться</a>
+           
         <?php endif; ?>
         <a href="<?= Url::to(['/user/profile/unsubscribe/', 'id' => $user->getId()]) ?>"
            class="btn btn-danger">Отписаться</a>

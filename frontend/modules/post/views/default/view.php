@@ -48,8 +48,8 @@ use yii\helpers\Html;
                 <h6>Комментарии</h6>
                 <?php foreach ($comments as $comment): ?>
                     <div class="comment" data-id="<?=$comment->id?>">
-                        <strong><?= $comment->user->nickname ?>:</strong>
-                        <p> <?= Html::encode($comment->comment) ?></p>
+                        <strong><?=Html::encode($comment->user->nickname) ?>:</strong>
+                        <p class="comment-body"> <?= Html::encode($comment->comment) ?></p>
                         <p><?= date('Y-i-d H:m:s', $comment->updated_at);?> </p>
                         <?php if ($comment->user_id === $currentUser->id):?>
                         <a href="/comment/delete/<?= $comment->id?>"  class="btn btn-danger">Удалить</a>
