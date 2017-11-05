@@ -28,7 +28,7 @@ class ProfileController extends Controller
             return $this->render('view', [
                 'user' => $this->findUser($nickname),
                 'currentUser' => $currentUser,
-                'picture' => $picture
+                'modelPicture' => $picture
             ]);
         }
         return $this->redirect('/user/default/login');
@@ -107,7 +107,7 @@ class ProfileController extends Controller
             if ($user->save(false,['picture'])) {
                 return [
                     'success' => true,
-                    'picture' => Yii::$app->storage->getFile($user->picture)
+                    'pictureUrl' => Yii::$app->storage->getFile($user->picture)
                 ];
             }
         }

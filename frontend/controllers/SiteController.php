@@ -49,7 +49,7 @@ class SiteController extends Controller
         $feedItems = $currentUser->getFeed($limit);
 
         return $this->render('index', [
-            'feeds' => $feedItems,
+            'feedItems' => $feedItems,
             'currentUser' => $currentUser,
 
         ]);

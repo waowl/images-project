@@ -12,6 +12,7 @@ use Yii;
  * @property string $filename
  * @property string $description
  * @property integer $created_at
+ * @property integer $complaints
  */
 class Post extends \yii\db\ActiveRecord
 {
@@ -54,6 +55,9 @@ class Post extends \yii\db\ActiveRecord
         return $this->hasMany(Comment::className(), ['post_id' => 'id']);
     }
 
+    public function commentsCount() {
+        return $this->hasMany(Comment::className(), ['post_id' => 'id'])->count();
+    }
     public function like(User $user)
     {
         $redis = Yii::$app->redis;
@@ -83,5 +87,17 @@ class Post extends \yii\db\ActiveRecord
     {
         $redis = Yii::$app->redis;
         return $redis->sismember("post:{$this->getId()}:likes", $user->getId());
+    }
+
+    public function complain(User $user)
+    {
+        $redis = Yii::$app->redis;
+        $key = "post:{$this->getId()}:complaints";
+
+        if (!$redis->sismember($key, $user->getId())) {
+            $redis->sadd($key, $user->getId());
+            $this->complaints++;
+            return $this->save(false, ['complaints']);
+        }
     }
 }

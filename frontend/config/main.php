@@ -21,12 +21,7 @@ return [
         ],
     ],
     'components' => [
-        'redis' => [
-            'class' => 'yii\redis\Connection',
-            'hostname' => 'localhost',
-            'port' => 6379,
-            'database' => 0,
-        ],
+
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
@@ -48,9 +43,7 @@ return [
                 ],
             ],
         ],
-        'storage' => [
-          'class' => 'frontend\components\Storage'
-        ],
+
         'feedService' => [
             'class' => 'frontend\components\FeedService'
         ],
