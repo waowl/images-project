@@ -9,6 +9,9 @@ return [
                 ],
             ],
         ],
+        'authManager' => [
+          'class' => 'yii\rbac\DbManager'
+        ],
         'redis' => [
             'class' => 'yii\redis\Connection',
             'hostname' => 'localhost',

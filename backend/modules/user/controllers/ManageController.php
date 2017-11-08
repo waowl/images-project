@@ -1,9 +1,9 @@
 <?php
 
-namespace backend\modules\complaints\controllers;
+namespace backend\modules\user\controllers;
 
 use Yii;
-use backend\models\Post;
+use backend\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * ManageController implements the CRUD actions for Post model.
+ * ManageController implements the CRUD actions for User model.
  */
 class ManageController extends Controller
 {
@@ -27,33 +27,17 @@ class ManageController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['index', 'view'],
-                        'roles' => ['admin', 'moderator']
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['delete', 'update'],
-                        'roles' => ['admin']
-                    ],
-                ],
-
-            ],
         ];
     }
 
     /**
-     * Lists all Post models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Post::findComplaints(),
+            'query' => User::find(),
         ]);
 
         return $this->render('index', [
@@ -62,7 +46,7 @@ class ManageController extends Controller
     }
 
     /**
-     * Displays a single Post model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      */
@@ -74,8 +58,28 @@ class ManageController extends Controller
     }
 
 
+
     /**
-     * Deletes an existing Post model.
+     * Updates an existing User model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -88,27 +92,18 @@ class ManageController extends Controller
     }
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Post the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    public function actionApprove($id)
-    {
-        $post = Post::findOne($id);
-        if ($post->approve()) {
-            Yii::$app->session->setFlash('success', 'Post was approved');
-            return $this->redirect(['index']);
         }
     }
 }
