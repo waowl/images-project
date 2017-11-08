@@ -9,8 +9,13 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
-    'language' => 'ru',
+    'bootstrap' => [
+        'log',
+        [
+            'class' => 'frontend\components\LanguageSelector'
+        ]
+    ],
+    'language' => 'ru-RU',
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [
         'user' => [
