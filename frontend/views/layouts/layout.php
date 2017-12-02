@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -26,10 +27,10 @@ AppAsset::register($this);
     <section class="menu">
         <div class="container">
             <div class="menu__items">
-                <div class="menu__item"><a class="menu__item_link" href="/feed.html">
+                <div class="menu__item"><a class="menu__item_link" href="/">
                         <svg class="icon icon-news menu__item_icon">
                             <use xlink:href="/images/symbol/sprite.svg#news"></use>
-                        </svg></a><a class="menu__item_link" href="/">
+                        </svg></a><a class="menu__item_link" href="<?= Url::to(['/user/profile/view', 'nickname' => Yii::$app->user->identity->getNickname() ? Yii::$app->user->identity->getNickname() : Yii::$app->user->identity->getName()]); ?>">
                         <svg class="icon icon-user menu__item_icon">
                             <use xlink:href="/images/symbol/sprite.svg#user"></use>
                         </svg></a><a class="menu__item_link" href="/post/create">

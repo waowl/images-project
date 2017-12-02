@@ -77,7 +77,7 @@ class Post extends \yii\db\ActiveRecord
         return $this->id;
     }
 
-    public function countLikes()
+    public function likesCount()
     {
         $redis = Yii::$app->redis;
         return $redis->scard("post:{$this->getId()}:likes");

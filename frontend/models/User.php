@@ -235,7 +235,7 @@ class User extends ActiveRecord implements IdentityInterface
         $redis = Yii::$app->redis;
         $key = "user:{$this->getId()}:followers";
         $ids = $redis->smembers($key);
-        return User::find()->select('id,username, nickname')->where(['id' => $ids])->orderBy('username')->asArray()->all();
+        return User::find()->select('id,username, nickname, picture')->where(['id' => $ids])->orderBy('username')->asArray()->all();
     }
 
     /**
@@ -247,17 +247,20 @@ class User extends ActiveRecord implements IdentityInterface
         $redis = Yii::$app->redis;
         $key = "user:{$this->getId()}:subscriptions";
         $ids = $redis->smembers($key);
-        return User::find()->select('id,username, nickname')->where(['id' => $ids])->orderBy('username')->asArray()->all();
+        return User::find()->select('id,username, nickname, picture')->where(['id' => $ids])->orderBy('username')->asArray()->all();
     }
 
-    /**
-     * @param string $list
-     * @return mixed
-     */
-    public function getListCount($list)
+
+    public function getFollowersCount()
     {
         $redis = Yii::$app->redis;
-        return $redis->scard("user:{$this->getId()}:{$list}");
+        return $redis->scard("user:{$this->getId()}:followers");
+    }
+
+    public function getSubscriptionsCount()
+    {
+        $redis = Yii::$app->redis;
+        return $redis->scard("user:{$this->getId()}:subscriptions");
     }
 
     public function getMutualSubscriptons(User $user)
