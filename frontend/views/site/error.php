@@ -9,19 +9,17 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
-    </div>
-
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
-
-</div>
+    <section class="notfound">
+        <div class="container">
+            <div class="notfound__wrapper">
+                <div class="notfound__left">
+                    <h1 class="notfound__header">Page not Found</h1>
+                    <p>Something went wrong.<a class="back__link" href="/">Go back?</a></p>
+                    <div class="sign">404</div>
+                </div>
+                <div class="notfound__right"><img src="/images/404.png"></div>
+            </div>
+        </div>
+    </section>

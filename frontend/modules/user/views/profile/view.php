@@ -15,6 +15,316 @@ $this->title = Html::encode($user->username);
 ?>
 
 
+<section class="main">
+    <div class="container">
+        <div class="main__wrapper">
+            <div class="main__user">
+                <div class="main__user_avatar"><img src="/images/user_avatar.jpg"></div>
+                <div class="main__user_description">
+                    <p><a class="user__name" href="#">Jane Doe</a></p>
+                    <p class="user__nickname">@janedoe</p>
+                    <p class="user__descr">Lorem ipsum dolor sit aLorem ipsum dolor sit</p>
+                    <div class="user__settings"><a href="user/edit">
+                            <svg class="icon icon-settings user__settings_icon">
+                                <use xlink:href="/images/symbol/sprite.svg#settings"></use>
+                            </svg></a></div>
+                </div>
+                <div class="main__user_follow"><a class="btn__follow" href="/follow">Follow</a></div>
+                <div class="main__user_info">
+                    <div class="user__posts"><span class="count">34</span>
+                        <p class="info_title">Posts</p>
+                    </div>
+                    <div class="user__followers"><span class="count">256</span>
+                        <p><a class="info_title" href="#followers-modal">Followers</a></p>
+                    </div>
+                    <div class="user__following"><span class="count">123</span>
+                        <p><a class="info_title" href="#following-modal">Following</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="main__posts">
+                <div class="posts_wrapper">
+                    <div class="posts__row">
+                        <div class="post_item"><a href="post"><img src="/images/post1.png">
+                                <div class="post__item__overlay">
+                                    <div class="overlay__content">
+                                        <div class="post_comments">
+                                            <svg class="icon icon-bubble overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                            </svg><span>   44</span>
+                                        </div>
+                                        <div class="post_likes">
+                                            <svg class="icon icon-heart overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg><span> 31</span>
+                                        </div>
+                                    </div>
+                                </div></a></div>
+                        <div class="post_item"><a href="post"><img src="/images/post2.png"></a>
+                            <div class="post__item__overlay">
+                                <div class="overlay__content">
+                                    <div class="post_comments">
+                                        <svg class="icon icon-bubble overlay_icon">
+                                            <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                        </svg><span>   44</span>
+                                    </div>
+                                    <div class="post_likes">
+                                        <svg class="icon icon-heart overlay_icon">
+                                            <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                        </svg><span> 31</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post_item"><a href="post"><img src="/images/post3.png">
+                                <div class="post__item__overlay">
+                                    <div class="overlay__content">
+                                        <div class="post_comments">
+                                            <svg class="icon icon-bubble overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                            </svg><span>   44</span>
+                                        </div>
+                                        <div class="post_likes">
+                                            <svg class="icon icon-heart overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg><span> 31</span>
+                                        </div>
+                                    </div>
+                                </div></a></div>
+                    </div>
+                    <div class="posts__row">
+                        <div class="post_item"><a href="post"><img src="/images/post1.png">
+                                <div class="post__item__overlay">
+                                    <div class="overlay__content">
+                                        <div class="post_comments">
+                                            <svg class="icon icon-bubble overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                            </svg><span>   44</span>
+                                        </div>
+                                        <div class="post_likes">
+                                            <svg class="icon icon-heart overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg><span> 31</span>
+                                        </div>
+                                    </div>
+                                </div></a></div>
+                        <div class="post_item"><a href="post"><img src="/images/post2.png"></a>
+                            <div class="post__item__overlay">
+                                <div class="overlay__content">
+                                    <div class="post_comments">
+                                        <svg class="icon icon-bubble overlay_icon">
+                                            <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                        </svg><span>   44</span>
+                                    </div>
+                                    <div class="post_likes">
+                                        <svg class="icon icon-heart overlay_icon">
+                                            <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                        </svg><span> 31</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post_item"><a href="post"><img src="/images/post3.png">
+                                <div class="post__item__overlay">
+                                    <div class="overlay__content">
+                                        <div class="post_comments">
+                                            <svg class="icon icon-bubble overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                            </svg><span>   44</span>
+                                        </div>
+                                        <div class="post_likes">
+                                            <svg class="icon icon-heart overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg><span> 31</span>
+                                        </div>
+                                    </div>
+                                </div></a></div>
+                    </div>
+                    <div class="posts__row">
+                        <div class="post_item"><a href="post"><img src="/images/post1.png">
+                                <div class="post__item__overlay">
+                                    <div class="overlay__content">
+                                        <div class="post_comments">
+                                            <svg class="icon icon-bubble overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                            </svg><span>   44</span>
+                                        </div>
+                                        <div class="post_likes">
+                                            <svg class="icon icon-heart overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg><span> 31</span>
+                                        </div>
+                                    </div>
+                                </div></a></div>
+                        <div class="post_item"><a href="post"><img src="/images/post2.png"></a>
+                            <div class="post__item__overlay">
+                                <div class="overlay__content">
+                                    <div class="post_comments">
+                                        <svg class="icon icon-bubble overlay_icon">
+                                            <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                        </svg><span>   44</span>
+                                    </div>
+                                    <div class="post_likes">
+                                        <svg class="icon icon-heart overlay_icon">
+                                            <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                        </svg><span> 31</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post_item"><a href="post"><img src="/images/post3.png">
+                                <div class="post__item__overlay">
+                                    <div class="overlay__content">
+                                        <div class="post_comments">
+                                            <svg class="icon icon-bubble overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                            </svg><span>   44</span>
+                                        </div>
+                                        <div class="post_likes">
+                                            <svg class="icon icon-heart overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg><span> 31</span>
+                                        </div>
+                                    </div>
+                                </div></a></div>
+                    </div>
+                    <div class="posts__row">
+                        <div class="post_item"><a href="post"><img src="/images/post1.png">
+                                <div class="post__item__overlay">
+                                    <div class="overlay__content">
+                                        <div class="post_comments">
+                                            <svg class="icon icon-bubble overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                            </svg><span>   44</span>
+                                        </div>
+                                        <div class="post_likes">
+                                            <svg class="icon icon-heart overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg><span> 31</span>
+                                        </div>
+                                    </div>
+                                </div></a></div>
+                        <div class="post_item"><a href="post"><img src="/images/post2.png"></a>
+                            <div class="post__item__overlay">
+                                <div class="overlay__content">
+                                    <div class="post_comments">
+                                        <svg class="icon icon-bubble overlay_icon">
+                                            <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                        </svg><span>   44</span>
+                                    </div>
+                                    <div class="post_likes">
+                                        <svg class="icon icon-heart overlay_icon">
+                                            <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                        </svg><span> 31</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post_item"><a href="post"><img src="/images/post3.png">
+                                <div class="post__item__overlay">
+                                    <div class="overlay__content">
+                                        <div class="post_comments">
+                                            <svg class="icon icon-bubble overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
+                                            </svg><span>   44</span>
+                                        </div>
+                                        <div class="post_likes">
+                                            <svg class="icon icon-heart overlay_icon">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg><span> 31</span>
+                                        </div>
+                                    </div>
+                                </div></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal" id="followers-modal">
+    <div class="modal__wrapper">
+        <div class="modal__header">
+            <p class="modal__header__title">Followers</p><a class="modal__header__close" href="#">
+                <div class="close__bar"></div></a>
+        </div>
+        <div class="modal__body">
+            <div class="recommended__item">
+                <div class="recommended__item_info">
+                    <div class="recommended__item_avatar"><img src="/images/recommended.jpg"></div>
+                    <div class="recommended__item_name">Erick Frei
+                        <p class="recommended__item_nickname">@supererick</p>
+                    </div>
+                </div><a class="btn-invert recommended__follow" href="follow">Follow</a>
+            </div>
+            <div class="recommended__item">
+                <div class="recommended__item_info">
+                    <div class="recommended__item_avatar"><img src="/images/recommended.jpg"></div>
+                    <div class="recommended__item_name">Erick Frei
+                        <p class="recommended__item_nickname">@supererick</p>
+                    </div>
+                </div><a class="btn-invert recommended__follow" href="follow">Follow</a>
+            </div>
+            <div class="recommended__item">
+                <div class="recommended__item_info">
+                    <div class="recommended__item_avatar"><img src="/images/recommended.jpg"></div>
+                    <div class="recommended__item_name">Erick Frei
+                        <p class="recommended__item_nickname">@supererick</p>
+                    </div>
+                </div><a class="btn-invert recommended__follow" href="follow">Follow</a>
+            </div>
+            <div class="recommended__item">
+                <div class="recommended__item_info">
+                    <div class="recommended__item_avatar"><img src="/images/recommended.jpg"></div>
+                    <div class="recommended__item_name">Erick Frei
+                        <p class="recommended__item_nickname">@supererick</p>
+                    </div>
+                </div><a class="btn-invert recommended__follow" href="follow">Follow</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="following-modal">
+    <div class="modal__wrapper">
+        <div class="modal__header">
+            <p class="modal__header__title">Following</p><a class="modal__header__close" href="#">
+                <div class="close__bar"></div></a>
+        </div>
+        <div class="modal__body">
+            <div class="recommended__item">
+                <div class="recommended__item_info">
+                    <div class="recommended__item_avatar"><img src="/images/recommended.jpg"></div>
+                    <div class="recommended__item_name">Erick Frei
+                        <p class="recommended__item_nickname">@supererick</p>
+                    </div>
+                </div><a class="btn-invert recommended__follow" href="follow">Unfollow</a>
+            </div>
+            <div class="recommended__item">
+                <div class="recommended__item_info">
+                    <div class="recommended__item_avatar"><img src="/images/recommended.jpg"></div>
+                    <div class="recommended__item_name">Erick Frei
+                        <p class="recommended__item_nickname">@supererick</p>
+                    </div>
+                </div><a class="btn-invert recommended__follow" href="follow">Unfollow</a>
+            </div>
+            <div class="recommended__item">
+                <div class="recommended__item_info">
+                    <div class="recommended__item_avatar"><img src="/images/recommended.jpg"></div>
+                    <div class="recommended__item_name">Erick Frei
+                        <p class="recommended__item_nickname">@supererick</p>
+                    </div>
+                </div><a class="btn-invert recommended__follow" href="follow">Unfollow</a>
+            </div>
+            <div class="recommended__item">
+                <div class="recommended__item_info">
+                    <div class="recommended__item_avatar"><img src="/images/recommended.jpg"></div>
+                    <div class="recommended__item_name">Erick Frei
+                        <p class="recommended__item_nickname">@supererick</p>
+                    </div>
+                </div><a class="btn-invert recommended__follow" href="follow">Unfollow</a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="page-posts no-padding">
     <div class="row">
         <div class="page page-post col-sm-12 col-xs-12 post-82">

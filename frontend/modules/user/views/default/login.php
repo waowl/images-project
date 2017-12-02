@@ -10,37 +10,34 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<section class="login">
+    <div class="login__wrapper">
+        <div class="login__logo"><img src="/images/logo.png"></div>
+        <div class="login__body">
+            <div class="login__form">
 
-    <p>Please fill out the following fields to login:</p>
+                <?php $form = ActiveForm::begin(); ?>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                <?= $form->field($model, 'email',  [
+                    'inputOptions'=>[
+                        'class'=>'form__field email__field',
+                        'placeholder'=>'Enter your email'
+                    ]
+                ])->textInput()->label(false) ?>
 
-                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'password',  [
+                    'inputOptions'=>[
+                        'class'=>'form__field email__field',
+                        'placeholder'=>'Enter your password'
+                    ]
+                ])->passwordInput()->label(false) ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= Html::submitButton('Login', ['class' => 'btn-filled btn-signin', 'name' => 'login-button']) ?>
+                <span>OR</span><a class="btn-filled btn-fb" href="/user/default/auth?authclient=facebook"><img src="/images/fb_ico.png"><span>Login with Facebook</span></a>
 
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['/user/default/request-password-reset']) ?>.
-                </div>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
+            </div>
         </div>
-        <div>
-            <h4>Login with Facebook</h4>
-            <?= yii\authclient\widgets\AuthChoice::widget([
-                'baseAuthUrl' => ['/user/default/auth'],
-                'popupMode' => false,
-            ]) ?>
-        </div>
+        <div class="login__bottom"><?= Html::a('Forgot password?', ['/user/default/request-password-reset'],  ['class'=> "login__bottom_link"]) ?><span>No account? &nbsp;<?= Html::a('Sign Up!', ['/user/default/signup'], ['class'=> "login__bottom_link"]) ?></span></div>
     </div>
-</div>
+</section>

@@ -10,22 +10,26 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Reset password';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-reset-password">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please choose your new password:</p>
+<section class="login">
+    <div class="login__wrapper">
+        <div class="login__logo"><img src="/images/logo.png"></div>
+        <div class="login__body">
+            <div class="login__form">
+                <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
+                <span>Please choose your new password:</span>
+                <?= $form->field($model, 'password', [
+                    'inputOptions'=>[
+                        'class'=>'form__field email__field',
+                        'placeholder'=>'Enter your new password'
+                    ]
+                ])->textInput(['autofocus' => true])->label(false)  ?>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
+                <?= Html::submitButton('Send', ['class' => 'btn-filled btn-signup']) ?>
 
-                <?= $form->field($model, 'password')->passwordInput(['autofocus' => true]) ?>
+                <?php ActiveForm::end(); ?>
 
-                <div class="form-group">
-                    <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+            </div>
         </div>
     </div>
-</div>
+</section>

@@ -15,6 +15,7 @@ return [
             'class' => 'frontend\components\LanguageSelector'
         ]
     ],
+    'layout'=> 'layout',
     'language' => 'ru-RU',
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [
