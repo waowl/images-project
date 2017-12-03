@@ -27,6 +27,8 @@ AppAsset::register($this);
     <section class="menu">
         <div class="container">
             <div class="menu__items">
+                <?php if (!Yii::$app->user->isGuest):?>
+
                 <div class="menu__item"><a class="menu__item_link" href="/">
                         <svg class="icon icon-news menu__item_icon">
                             <use xlink:href="/images/symbol/sprite.svg#news"></use>
@@ -36,7 +38,21 @@ AppAsset::register($this);
                         </svg></a><a class="menu__item_link" href="/post/create">
                         <svg class="icon icon-pen menu__item_icon">
                             <use xlink:href="/images/symbol/sprite.svg#pen"></use>
-                        </svg></a></div>
+                        </svg></a>
+                </div>
+                    <?php else:?>
+                    <div class="menu__item"><a class="menu__item_link" href="/user/default/login">
+                            <svg class="icon icon-news menu__item_icon">
+                                <use xlink:href="/images/symbol/sprite.svg#news"></use>
+                            </svg></a><a class="menu__item_link" href="/user/default/login">
+                            <svg class="icon icon-user menu__item_icon">
+                                <use xlink:href="/images/symbol/sprite.svg#user"></use>
+                            </svg></a><a class="menu__item_link" href="/user/default/login">
+                            <svg class="icon icon-pen menu__item_icon">
+                                <use xlink:href="/images/symbol/sprite.svg#pen"></use>
+                            </svg></a>
+                    </div>
+                <?php endif;?>
                 <div class="menu__item"><a href="/"><img class="menu__logo" src="/images/logo.png" alt="logo"></a></div>
                 <div class="menu__item"><a class="menu__item_link" href="#search__form">
                         <svg class="icon icon-search menu__item_icon">

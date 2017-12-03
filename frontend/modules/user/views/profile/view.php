@@ -22,7 +22,7 @@ $this->title = Html::encode($user->username);
             <div class="main__user">
                 <div class="main__user_avatar"><img src="<?= $user->getPicture(); ?>"></div>
                 <div class="main__user_description">
-                    <p><a class="user__name" href="#"><?= $user->username?></a></p>
+                    <p><a class="user__name" href="#"><?= $user->username ?></a></p>
                     <p class="user__nickname">@<?= $user->nickname;?></p>
                     <p class="user__descr"><?= $user->about; ?></p>
                     <?php if($user->equals($currentUser)):?>
@@ -60,8 +60,8 @@ $this->title = Html::encode($user->username);
                             <?php endif;?>
 
                             <div class="post_item">
-                                <a href="post">
-                                    <img src="<?= Yii::$app->storage->getFile($post->filename); ?>">
+                                <a href="<?= Url::to('/post/' . $post->id)?> ">
+                                    <img src="<?= $post->getImage(); ?>">
                                     <div class="post__item__overlay">
                                         <div class="overlay__content">
                                             <div class="post_comments">
@@ -102,17 +102,20 @@ $this->title = Html::encode($user->username);
             <?php foreach ($user->getFollowers() as $follower): ?>
                 <div class="recommended__item">
                     <div class="recommended__item_info">
-                        <div class="recommended__item_avatar"><img src="<?= $follower['picture']?> ?> "></div>
-                        <div class="recommended__item_name"><?= $follower['username']?>
-                            <p class="recommended__item_nickname">@<?= $follower['nickname']?> </p>
+                        <div class="recommended__item_avatar">
+                            <a href="<?= Url::to([
+                                '/user/profile/view',
+                                'nickname' => $follower->getNickname()
+                            ]); ?>">
+                                <img src="<?= $follower->getPicture();?> ">
+                            </a>
+                        </div>
+                        <div class="recommended__item_name"><?= $follower->username?>
+                            <p class="recommended__item_nickname">@<?= $follower->nickname?> </p>
                         </div>
                     </div><a class="btn-invert recommended__follow" href="follow">Follow</a>
                 </div>
-                <div class="col-md-12">
-                    <a href="<?= Url::to(['/user/profile/view', 'nickname' => ($follower['nickname']) ? $follower['nickname'] : $follower['id']]); ?>">
-                        <?= Html::encode($follower['username']); ?>
-                    </a>
-                </div>
+
             <?php endforeach; ?>
         </div>
     </div>
@@ -127,9 +130,16 @@ $this->title = Html::encode($user->username);
             <?php foreach ($user->getSubscriptions() as $subscription): ?>
                 <div class="recommended__item">
                     <div class="recommended__item_info">
-                        <div class="recommended__item_avatar"><img src="<?= ($subscription['picture'])?> "></div>
-                        <div class="recommended__item_name"><?= ($subscription['username'])?>
-                            <p class="recommended__item_nickname">@<?= ($subscription['nickname'])?></p>
+                        <div class="recommended__item_avatar">
+                            <a href="<?= Url::to([
+                                '/user/profile/view',
+                                'nickname' => $subscription->getNickname()
+                            ]); ?>">
+                                <img src="<?= $subscription->getPicture();?>  ">
+                            </a>
+                        </div>
+                        <div class="recommended__item_name"><?= $subscription->username ?>
+                            <p class="recommended__item_nickname">@<?= $subscription->nickname?></p>
                         </div>
                     </div><a class="btn-invert recommended__follow" href="follow">Unfollow</a>
                 </div>

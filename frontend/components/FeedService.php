@@ -22,7 +22,7 @@ class FeedService
         $followers = $user->getFollowers();
         foreach ($followers as $follower) {
             $feed = new Feed();
-            $feed->user_id = $follower['id'];
+            $feed->user_id = $follower->id;
             $feed->author_id = $user->id;
             $feed->author_name = $user->username;
             $feed->author_nickname = $user->getNickname();

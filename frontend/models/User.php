@@ -235,7 +235,7 @@ class User extends ActiveRecord implements IdentityInterface
         $redis = Yii::$app->redis;
         $key = "user:{$this->getId()}:followers";
         $ids = $redis->smembers($key);
-        return User::find()->select('id,username, nickname, picture')->where(['id' => $ids])->orderBy('username')->asArray()->all();
+        return User::find()->where(['id' => $ids])->orderBy('username')->all();
     }
 
     /**
@@ -247,7 +247,7 @@ class User extends ActiveRecord implements IdentityInterface
         $redis = Yii::$app->redis;
         $key = "user:{$this->getId()}:subscriptions";
         $ids = $redis->smembers($key);
-        return User::find()->select('id,username, nickname, picture')->where(['id' => $ids])->orderBy('username')->asArray()->all();
+        return User::find()->where(['id' => $ids])->orderBy('username')->all();
     }
 
 

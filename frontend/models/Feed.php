@@ -49,11 +49,20 @@ class Feed extends \yii\db\ActiveRecord
     /**
      * @return mixed
      */
-    public function countLikes()
+    public function likesCount()
     {
         /* @var $redis Connection */
         $redis = Yii::$app->redis;
         return $redis->scard("post:{$this->post_id}:likes");
+    }
+
+    /**
+     * @return mixed
+     */
+    public function commentsCount()
+    {
+        $post  = Post::findOne($this->post_id);
+        return  $post->commentsCount();
     }
 
     public function isReported(User $user)
