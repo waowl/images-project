@@ -32,7 +32,20 @@ $this->title = Html::encode($user->username);
                             </svg></a></div>
                     <?php endif; ?>
                 </div>
-                <div class="main__user_follow"><a class="btn__follow" href="/follow">Follow</a></div>
+
+                <?php if ($currentUser && !$currentUser->equals($user)): ?>
+                <div class="main__user_follow">
+                    <?php if (!$currentUser->checkSubscription($user)):?>
+                        <a class="btn__follow" href="<?= Url::to(['/user/profile/subscribe', 'id' => $user->getId()]); ?>">Follow</a>
+                    <?php else:?>
+                        <a class="btn__unfollow" href="<?= Url::to(['/user/profile/unsubscribe', 'id' => $user->getId()]); ?>">Unfollow</a>
+
+                    <?php endif; ?>
+                </div>
+
+                <?php endif; ?>
+
+
                 <div class="main__user_info">
                     <div class="user__posts"><span class="count"><?= $user->getPostCount(); ?></span>
                         <p class="info_title">Posts</p>

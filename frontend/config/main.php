@@ -16,7 +16,7 @@ return [
         ]
     ],
     'layout'=> 'layout',
-    'language' => 'ru-RU',
+    'language' => 'en',
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [
         'user' => [

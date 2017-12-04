@@ -1,17 +1,13 @@
 $(document).ready(function () {
-    var like =  $('i.like');
-   $('a.button-like').click(function () {
+   $('.like').click(function () {
        var params = {
            'id' : $(this).attr('data-id')
        };
-      $.post('/post/default/like', params, data => {
+       console.log(params);
+      $.post('/post/default/unlike', params, data => {
+          console.log(data);
           if (data.success) {
-              $('.likes-count').text(data.count);
-           like.removeClass('fa-heart-o');
-           like.addClass('fa-heart');
-              like.addClass('red-heart');
-              $(this).hide();
-              $('a.button-unlike').show();
+
           }
       });
        return false;
@@ -32,4 +28,4 @@ $(document).ready(function () {
         });
         return false;
     })
-});
+}());

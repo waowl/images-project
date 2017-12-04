@@ -2,7 +2,7 @@
 
 namespace frontend\modules\post\controllers;
 
-use common\models\User;
+use frontend\models\User;
 use frontend\models\Comment;
 use frontend\models\Post;
 use frontend\modules\post\models\forms\CommentForm;
@@ -60,8 +60,9 @@ class DefaultController extends Controller
 
     public function actionLike()
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->render(['/user/default/login']);
+
+        if (Yii::$app->user->isGuest){
+            return $this->redirect('/user/default/login');
         }
         Yii::$app->response->format = Response::FORMAT_JSON;
 
@@ -75,7 +76,7 @@ class DefaultController extends Controller
 
         return [
             'success' => true,
-            'count' => $post->countLikes()
+            'count' => $post->likesCount()
         ];
     }
 

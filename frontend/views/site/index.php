@@ -43,9 +43,11 @@ $this->title = 'Newsfeed';
                                 </div>
                                 <div class="feed__item_bottom">
                                     <div class="bottom__activity">
-                                        <svg class="icon icon-heart feed__likes_icon">
-                                            <use xlink:href="images/symbol/sprite.svg#heart"></use>
-                                        </svg>
+                                        <a href="#" class="like" data-id="<?=$feedItem->post_id ?> ">
+                                            <svg class="icon icon-heart feed__likes_icon">
+                                                <use xlink:href="images/symbol/sprite.svg#heart"></use>
+                                            </svg>
+                                        </a>
                                         <span class="likes__count"><?= $feedItem->likesCount(); ?></span>
                                         <svg class="icon icon-bubble feed__comments_icon">
                                             <use xlink:href="images/symbol/sprite.svg#bubble"></use>
