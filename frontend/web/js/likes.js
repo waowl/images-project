@@ -4,8 +4,15 @@ $(document).ready(function () {
         var params = {
             'id' : $(this).attr('data-id')
         };
-        $.post('/post/default/like', params, data => {
-          console.log(data);
+        $.post('/post/default/unlike', params, data => {
+            if (data.success) {
+            $('.likes-count').text(data.count);
+            like.removeClass('fa-heart-o');
+            like.addClass('fa-heart');
+            like.addClass('red-heart');
+            $(this).hide();
+            $('a.button-unlike').show();
+        }
     });
         return false;
     });

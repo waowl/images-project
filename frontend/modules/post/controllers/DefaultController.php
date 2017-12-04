@@ -63,12 +63,8 @@ class DefaultController extends Controller
      */
     public function actionLike()
     {
-
         $this->enableCsrfValidation = false;
 
-        if(Yii::$app->request->isAjax) {
-            return 'ooook';
-        }
         if (Yii::$app->user->isGuest){
             return $this->redirect('/user/default/login');
         }

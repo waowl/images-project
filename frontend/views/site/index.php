@@ -52,7 +52,7 @@ $this->title = 'Newsfeed';
                                         <svg class="icon icon-bubble feed__comments_icon">
                                             <use xlink:href="images/symbol/sprite.svg#bubble"></use>
                                         </svg>
-                                        <span class="comment__count"><?= $feedItem->commentsCount() ?> </span>
+                                        <span class="comment__count"><?= $feedItem->commentsCount() ?> </span>`
                                     </div>
                                     <div class="bottom__date">
                                         <p>Posted:<span
