@@ -43,12 +43,18 @@ $this->title = 'Newsfeed';
                                 </div>
                                 <div class="feed__item_bottom">
                                     <div class="bottom__activity">
-                                        <a href="#" class="like" data-id="<?=$feedItem->post_id ?> ">
+                                        <a href="#"  class="<?= ($currentUser->likesPost($post->id)) ? 'hidden' : ''?> like"  data-id="<?=$post->id ?> ">
                                             <svg class="icon icon-heart feed__likes_icon">
-                                                <use xlink:href="images/symbol/sprite.svg#heart"></use>
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
                                             </svg>
                                         </a>
-                                        <span class="likes__count"><?= $feedItem->likesCount(); ?></span>
+                                        <a href="#"  class="<?= ($currentUser->likesPost($post->id)) ? '': 'hidden'?> unlike"  data-id="<?=$post->id ?> ">
+                                            <svg class="icon icon-heart feed__likes_icon liked">
+                                                <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                                            </svg>
+                                        </a>
+
+                                        <span class="count"><?= $post->likesCount()?> </span>
                                         <svg class="icon icon-bubble feed__comments_icon">
                                             <use xlink:href="images/symbol/sprite.svg#bubble"></use>
                                         </svg>

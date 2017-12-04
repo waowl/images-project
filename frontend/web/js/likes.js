@@ -1,33 +1,33 @@
 $(document).ready(function () {
     var like =  $('.like');
+    var unlike =  $('.unlike');
+    var icon = $(this).children('.icon');
+
     $(like).click(function () {
         var params = {
             'id' : $(this).attr('data-id')
         };
-        $.post('/post/default/unlike', params, data => {
+        $.post('/post/default/like', params, data => {
+            console.log(data);
+            console.log($(this).children('.icon'));
             if (data.success) {
-            $('.likes-count').text(data.count);
-            like.removeClass('fa-heart-o');
-            like.addClass('fa-heart');
-            like.addClass('red-heart');
-            $(this).hide();
-            $('a.button-unlike').show();
+            $('.count').text(data.count);
+            $(like).addClass("hidden");
+            $(unlike).removeClass("hidden");
         }
     });
         return false;
     });
-    $('a.button-unlike').click(function () {
+
+    $(unlike).click(function () {
         var params = {
             'id' : $(this).attr('data-id')
         };
         $.post('/post/default/unlike', params, data => {
             if (data.success) {
-            $('.likes-count').text(data.count);
-            like.removeClass('red-heart');
-            like.removeClass('fa-heart');
-            like.addClass('fa-heart-o');
-            $(this).hide();
-            $('a.button-like').show();
+            $('.count').text(data.count);
+            $(unlike).addClass("hidden");
+            $(like).removeClass("hidden");
         }
     });
         return false;

@@ -32,12 +32,18 @@ use yii\helpers\Html;
                 <div class="single__info__author"><img class="author_avatar" src="<?= $post->user->getPicture() ?>"><span class="author__nickname"><?=  Html::encode($post->user->nickname ? $post->user->nickname : $post->user->username) ?> </span></div>
                 <p class="single__info__title"><?= Html::encode($post->description)?></p>
                 <div class="single__info__actvity">
-                    <a href="#" class="like" data-id="<?=$post->id ?> ">
+                    <a href="#"  class="<?= ($currentUser->likesPost($post->id)) ? 'hidden' : ''?> like"  data-id="<?=$post->id ?> ">
                         <svg class="icon icon-heart feed__likes_icon">
                             <use xlink:href="/images/symbol/sprite.svg#heart"></use>
                         </svg>
                     </a>
-                   <span><?= $post->likesCount()?> </span>
+                    <a href="#"  class="<?= ($currentUser->likesPost($post->id)) ? '': 'hidden'?> unlike"  data-id="<?=$post->id ?> ">
+                        <svg class="icon icon-heart feed__likes_icon liked">
+                            <use xlink:href="/images/symbol/sprite.svg#heart"></use>
+                        </svg>
+                    </a>
+
+                   <span class="count"><?= $post->likesCount()?> </span>
                     <svg class="icon icon-bubble feed__comments_icon">
                         <use xlink:href="/images/symbol/sprite.svg#bubble"></use>
                     </svg><span><?= $post->commentsCount()?> </span>
