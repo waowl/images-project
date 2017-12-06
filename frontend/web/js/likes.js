@@ -5,7 +5,8 @@ $(document).ready(function () {
 
     $(like).click(function () {
         var params = {
-            'id' : $(this).attr('data-id')
+            'id' : $(this).attr('data-id'),
+            '_csrf-frontend':  $(this).attr('data-token')
         };
         $.post('/post/default/like', params, data => {
             console.log(data);
@@ -21,7 +22,8 @@ $(document).ready(function () {
 
     $(unlike).click(function () {
         var params = {
-            'id' : $(this).attr('data-id')
+            'id' : $(this).attr('data-id'),
+            '_csrf-frontend':  $(this).attr('data-token')
         };
         $.post('/post/default/unlike', params, data => {
             if (data.success) {

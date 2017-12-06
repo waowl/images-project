@@ -30,6 +30,7 @@ return [
 
         'request' => [
             'csrfParam' => '_csrf-frontend',
+
         ],
         'user' => [
             'identityClass' => 'frontend\models\User',
@@ -61,6 +62,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'profile/edit/<nickname:\w+>' => 'user/profile/edit',
                 'profile/<nickname:\w+>' => 'user/profile/view',
                 'post/<id:\d+>' => 'post/default/view',
                 'comment/delete/<id:\d+>' => 'post/default/comment-delete',

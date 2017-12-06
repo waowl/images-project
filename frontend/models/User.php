@@ -32,7 +32,20 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+    const SCENARIO_EDIT = 'edit';
+
+
+
     const DEFAULT_AVATAR = "/img/no-img.jpg";
+
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_EDIT => ['username', 'nickname', 'about'],
+
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -60,6 +73,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['username', 'nickname', 'about'], 'required', 'on' => self::SCENARIO_EDIT],
         ];
     }
 

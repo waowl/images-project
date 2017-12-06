@@ -43,18 +43,19 @@ $this->title = 'Newsfeed';
                                 </div>
                                 <div class="feed__item_bottom">
                                     <div class="bottom__activity">
-                                        <a href="#"  class="<?= ($currentUser->likesPost($post->id)) ? 'hidden' : ''?> like"  data-id="<?=$post->id ?> ">
+
+                                        <a href="#"  class="<?= ($currentUser->likesPost($feedItem->post_id)) ? 'hidden' : ''?> like" data-token="<?= Yii::$app->request->getCsrfToken()?>" data-id="<?=$feedItem->post_id ?> ">
                                             <svg class="icon icon-heart feed__likes_icon">
                                                 <use xlink:href="/images/symbol/sprite.svg#heart"></use>
                                             </svg>
                                         </a>
-                                        <a href="#"  class="<?= ($currentUser->likesPost($post->id)) ? '': 'hidden'?> unlike"  data-id="<?=$post->id ?> ">
+                                        <a href="#"  class="<?= ($currentUser->likesPost($feedItem->post_id)) ? '': 'hidden'?> unlike"  data-token="<?= Yii::$app->request->getCsrfToken()?> " data-id="<?=$feedItem->post_id ?> ">
                                             <svg class="icon icon-heart feed__likes_icon liked">
                                                 <use xlink:href="/images/symbol/sprite.svg#heart"></use>
                                             </svg>
                                         </a>
 
-                                        <span class="count"><?= $post->likesCount()?> </span>
+                                        <span class="count"><?= $feedItem->likesCount()?> </span>
                                         <svg class="icon icon-bubble feed__comments_icon">
                                             <use xlink:href="images/symbol/sprite.svg#bubble"></use>
                                         </svg>
@@ -66,17 +67,17 @@ $this->title = 'Newsfeed';
                                         </p>
                                     </div>
                                     <?php if (!$feedItem->isReported($currentUser)): ?>
-                                        <div class="bottom__complain"><a class="btn-filled" href="#"
-                                                                         data-id="<?= $feedItem->post_id ?>">
-                                                Complain</a></div>
+                                        <div class="bottom__complain"><a class="btn-filled button-complain" href="#"
+                                                                         data-id="<?= $feedItem->post_id?>">
+                                                Complain</a>
+                                        </div>
+
                                     <?php else: ?>
-                                        <div class="bottom__complain">Post has been reported.</div>
-                                        Post has been reported.
+                                        <div class="bottom__complain"><p>Post has been reported.</p></div>
                                     <?php endif; ?>
 
                                 </div>
                             </div>
-
                         <?php endforeach; ?>
 
                     <?php else: ?>
@@ -85,6 +86,7 @@ $this->title = 'Newsfeed';
                         </div>
                     <?php endif; ?>
                 </div>
+
                 <section class="recommended">
                     <div class="recommended__header">
                         <p class="recommended__title">Recommended</p>

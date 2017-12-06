@@ -58,12 +58,12 @@ class DefaultController extends Controller
         throw new NotFoundException();
     }
 
+
     /**
      * @return array|string|Response
      */
     public function actionLike()
     {
-        $this->enableCsrfValidation = false;
 
         if (Yii::$app->user->isGuest){
             return $this->redirect('/user/default/login');

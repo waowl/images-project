@@ -37,6 +37,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+
     public function actionIndex()
     {
         if (Yii::$app->user->isGuest) {

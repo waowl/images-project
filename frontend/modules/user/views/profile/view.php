@@ -26,7 +26,7 @@ $this->title = Html::encode($user->username);
                     <p class="user__nickname">@<?= $user->nickname;?></p>
                     <p class="user__descr"><?= $user->about; ?></p>
                     <?php if($user->equals($currentUser)):?>
-                    <div class="user__settings"><a href="user/edit">
+                    <div class="user__settings"><a href="<?= Url::to(['/user/profile/edit', 'nickname' => ($user->nickname) ? $user->nickname : $user->id]); ?> ">
                             <svg class="icon icon-settings user__settings_icon">
                                 <use xlink:href="/images/symbol/sprite.svg#settings"></use>
                             </svg></a></div>
