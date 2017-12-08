@@ -17,7 +17,8 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/main.min.js',
-        'js/lang.js'
+        'js/lang.js',
+        'js/search.js'
     ];
 
     public $depends = [

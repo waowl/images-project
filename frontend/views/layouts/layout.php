@@ -26,42 +26,7 @@ AppAsset::register($this);
     <section class="menu">
         <div class="container menu__container">
             <div class="search__results hidden">
-                <div class="search__results__item"><a class="results__item__link" href="">
-                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
-                        <div class="info__container">
-                            <p class="info__container__name">username</p>
-                            <p class="info__container__nickname">nickname</p>
-                        </div></a></div>
-                <div class="search__results__item"><a class="results__item__link" href="">
-                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
-                        <div class="info__container">
-                            <p class="info__container__name">username</p>
-                            <p class="info__container__nickname">nickname</p>
-                        </div></a></div>
-                <div class="search__results__item"><a class="results__item__link" href="">
-                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
-                        <div class="info__container">
-                            <p class="info__container__name">username</p>
-                            <p class="info__container__nickname">nickname</p>
-                        </div></a></div>
-                <div class="search__results__item"><a class="results__item__link" href="">
-                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
-                        <div class="info__container">
-                            <p class="info__container__name">username</p>
-                            <p class="info__container__nickname">nickname</p>
-                        </div></a></div>
-                <div class="search__results__item"><a class="results__item__link" href="">
-                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
-                        <div class="info__container">
-                            <p class="info__container__name">username</p>
-                            <p class="info__container__nickname">nickname</p>
-                        </div></a></div>
-                <div class="search__results__item"><a class="results__item__link" href="">
-                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
-                        <div class="info__container">
-                            <p class="info__container__name">username</p>
-                            <p class="info__container__nickname">nickname</p>
-                        </div></a></div>
+
             </div>
             <div class="menu__items">
                 <?php if (!Yii::$app->user->isGuest):?>
@@ -96,8 +61,8 @@ AppAsset::register($this);
                             <use xlink:href="/images/symbol/sprite.svg#search"></use>
                         </svg></a>
                     <div class="search__form" id="search__form">
-                        <form method="post" action="/search">
-                            <input class="search__field" type="text">
+                        <form method="post" action="">
+                            <input class="search__field" id="squery" type="text">
                             <input class="search__btn" type="submit">
                         </form>
                     </div>
@@ -124,7 +89,7 @@ AppAsset::register($this);
     </section>
     <?= $content ?>
     <section class="footer">
-        <div class="footer__title"><span>/images &copy; 2017</span></div>
+        <div class="footer__title"><span>Images &copy; 2017</span></div>
     </section>
     <div class="overlay">
         <div class="preloader">

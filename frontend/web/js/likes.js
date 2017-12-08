@@ -9,7 +9,6 @@ $(document).ready(function () {
             '_csrf-frontend':  $(this).attr('data-token')
         };
         $.post('/post/default/like', params, data => {
-            console.log(data);
             console.log($(this).children('.icon'));
             if (data.success) {
             $('.count').text(data.count);
@@ -33,5 +32,6 @@ $(document).ready(function () {
         }
     });
         return false;
-    })
+    });
+
 });

@@ -34,4 +34,9 @@ class FeedService
             $feed->save();
         }
     }
+
+    public function  addNewFollowed()
+    {
+
+    }
 }

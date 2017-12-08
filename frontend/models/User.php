@@ -32,6 +32,8 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+
+
     const SCENARIO_EDIT = 'edit';
 
 
@@ -218,16 +220,17 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function follow(User $user)
     {
-        if ($this->getId() === $user->getId()) {
+        if ($this->getId() !== $user->getId()) {
+            $k1 = "user:{$this->getId()}:subscriptions";
+            $k2 = "user:{$user->getId()}:followers";
+            print_r($posts); die;
+            $redis = Yii::$app->redis;
+            $redis->sadd($k1, $user->getId());
+            $redis->sadd($k2, $this->getId());
+        } else {
             throw new Exception('Подписка на самого себя невозможна!');
         }
 
-        $k1 = "user:{$this->getId()}:subscriptions";
-        $k2 = "user:{$user->getId()}:followers";
-
-        $redis = Yii::$app->redis;
-        $redis->sadd($k1, $user->getId());
-        $redis->sadd($k2, $this->getId());
     }
 
     public function unFollow(User $user)

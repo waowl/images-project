@@ -21,10 +21,11 @@ use yii\web\UploadedFile;
 
 class ProfileController extends Controller
 {
-    public function beforeAction($action) {
+    // TODO: check will be uploading work?
+   /* public function beforeAction($action) {
         $this->enableCsrfValidation = ($action->id !== "upload-picture");
         return parent::beforeAction($action);
-    }
+    }*/
 
     public function actionView($nickname)
     {
