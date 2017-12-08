@@ -1,17 +1,15 @@
-$('.comment').click(function (e) {
+$('.action__edit').click(function (e) {
+        e.preventDefault();
         var $this = $(this);
-        var text;
-        if (e.target.classList.contains('edit')) {
-            text = $this.find('.comment-body').text();
+        var id = $this.attr('data-id');
+        var form = $('#comment_form');
+        var text =  $this.parent().parent().find('.comment__body').text();
+        var input = form.find('.leave__comment');
 
-            var edit = $('.edit-form');
-            var id = $this.attr('data-id');
-            var form = edit.find("form");
-            var action = form.attr("action");
-            form.attr('action', action + id);
-            console.log(id);
-            $("[name='comment']").val(text);
-            edit.insertAfter($this);
-        }
+         form.attr('action', '/comment/edit/'+id);
+         input.val(text);
+         input.css('border', '2px solid green');
+        console.log(text);
+
     }
 );

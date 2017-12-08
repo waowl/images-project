@@ -65,6 +65,7 @@ return [
                 'profile/edit/<nickname:\w+>' => 'user/profile/edit',
                 'profile/<nickname:\w+>' => 'user/profile/view',
                 'post/<id:\d+>' => 'post/default/view',
+                'post/create' => 'post/default/create',
                 'comment/delete/<id:\d+>' => 'post/default/comment-delete',
                 'comment/edit/<id:\d+>' => 'post/default/comment-edit'
             ],

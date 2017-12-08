@@ -10,17 +10,19 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use dosamigos\fileupload\FileUpload;
+use yii\web\JqueryAsset;
 
-$this->title = Html::encode($user->username);
+$this->title = Yii::t('profile', 'Profile') .' | '. Html::encode($user->username);
 ?>
-
-
-
 <section class="main">
     <div class="container">
         <div class="main__wrapper">
             <div class="main__user">
-                <div class="main__user_avatar"><img src="<?= $user->getPicture(); ?>"></div>
+                <div class="main__user_avatar">
+                    <div class="user_avatar__container">
+                        <img src="<?= $user->getPicture(); ?>">
+                    </div>
+                </div>
                 <div class="main__user_description">
                     <p><a class="user__name" href="#"><?= $user->username ?></a></p>
                     <p class="user__nickname">@<?= $user->nickname;?></p>
@@ -48,13 +50,13 @@ $this->title = Html::encode($user->username);
 
                 <div class="main__user_info">
                     <div class="user__posts"><span class="count"><?= $user->getPostCount(); ?></span>
-                        <p class="info_title">Posts</p>
+                        <p class="info_title"><?= Yii::t('profile', 'Posts') ?></p>
                     </div>
                     <div class="user__followers"><span class="count"><?= $user->getFollowersCount('subscriptions'); ?></span>
-                        <p><a class="info_title" href="#followers-modal">Followers</a></p>
+                        <p><a class="info_title" href="#followers-modal"><?= Yii::t('profile', 'Followers') ?></a></p>
                     </div>
                     <div class="user__following"><span class="count"><?= $user->getSubscriptionsCount(); ?></span>
-                        <p><a class="info_title" href="#following-modal">Following</a></p>
+                        <p><a class="info_title" href="#following-modal"><?= Yii::t('profile', 'Following') ?></a></p>
                     </div>
                 </div>
             </div>
@@ -126,7 +128,7 @@ $this->title = Html::encode($user->username);
                         <div class="recommended__item_name"><?= $follower->username?>
                             <p class="recommended__item_nickname">@<?= $follower->nickname?> </p>
                         </div>
-                    </div><a class="btn-invert recommended__follow" href="follow">Follow</a>
+                    </div><a class="btn-invert recommended__follow" href="<?= Url::to(['/user/profile/subscribe', 'id' => $follower->id]); ?>">Follow</a>
                 </div>
 
             <?php endforeach; ?>
@@ -154,7 +156,10 @@ $this->title = Html::encode($user->username);
                         <div class="recommended__item_name"><?= $subscription->username ?>
                             <p class="recommended__item_nickname">@<?= $subscription->nickname?></p>
                         </div>
-                    </div><a class="btn-invert recommended__follow" href="follow">Unfollow</a>
+                    </div>
+                    <?php if ($currentUser->equals($user)): ?>
+                    <a class="btn-invert recommended__follow unfollow" href="<?= Url::to(['/user/profile/unsubscribe', 'id' => $subscription->id]); ?>" >Unfollow</a>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
 

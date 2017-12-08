@@ -56,7 +56,6 @@ class CommentForm extends Model
     {
         $comment = Comment::findOne($id);
         $comment->comment = $this->comment;
-
         return $comment->save(false);
     }
 }

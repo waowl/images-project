@@ -7,6 +7,7 @@
  */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 <section class="single">
@@ -53,13 +54,21 @@ use yii\helpers\Html;
                     <?php if (!empty($comments)): ?>
                         <?php foreach ($comments as $comment): ?>
                             <div class="single__info__comment">
-                                <p class="comment__author"><?=Html::encode($comment->user->username) ?></p>
+                                <div class="comment__author">
+                                    <?=Html::encode($comment->user->username) ?>
+                                </div>
+
                                 <p class="comment__body"><?= Html::encode($comment->comment) ?></p>
+                                    <?php if ($currentUser->equals($comment->user)):?>
+                                        <div class="comment__actions">
+                                            <a href="<?= Url::to('/comment/delete/'. $comment->id )?> " class="comment__action action__delete">Удалить</a>
+                                            <a href="" data-id = "<?= $comment->id  ?> "class="comment__action action__edit">Изменить</a>
+                                        </div>
+                                    <?php endif;?>
                             </div>
                     <?php endforeach;?>
                         <?php else:?>
                         <div class="single__info__comment no__comments">
-
                             <p class="comment__body ">There is no  any comments yet</p>
                         </div>
                     <?php endif;?>

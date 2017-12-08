@@ -132,7 +132,7 @@ class DefaultController extends Controller
     {
         $currentUser = Yii::$app->user->identity;
         $commentForm = new CommentForm($currentUser);
-        $commentForm->attributes = Yii::$app->request->post();
+        $commentForm->load(Yii::$app->request->post());
         if ($commentForm->update($id)) {
             Yii::$app->session->setFlash('success', 'Ваш комментарий  обновлён');
         }

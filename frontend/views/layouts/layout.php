@@ -24,7 +24,45 @@ AppAsset::register($this);
 <body>
 <div class="wrapper">
     <section class="menu">
-        <div class="container">
+        <div class="container menu__container">
+            <div class="search__results hidden">
+                <div class="search__results__item"><a class="results__item__link" href="">
+                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
+                        <div class="info__container">
+                            <p class="info__container__name">username</p>
+                            <p class="info__container__nickname">nickname</p>
+                        </div></a></div>
+                <div class="search__results__item"><a class="results__item__link" href="">
+                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
+                        <div class="info__container">
+                            <p class="info__container__name">username</p>
+                            <p class="info__container__nickname">nickname</p>
+                        </div></a></div>
+                <div class="search__results__item"><a class="results__item__link" href="">
+                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
+                        <div class="info__container">
+                            <p class="info__container__name">username</p>
+                            <p class="info__container__nickname">nickname</p>
+                        </div></a></div>
+                <div class="search__results__item"><a class="results__item__link" href="">
+                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
+                        <div class="info__container">
+                            <p class="info__container__name">username</p>
+                            <p class="info__container__nickname">nickname</p>
+                        </div></a></div>
+                <div class="search__results__item"><a class="results__item__link" href="">
+                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
+                        <div class="info__container">
+                            <p class="info__container__name">username</p>
+                            <p class="info__container__nickname">nickname</p>
+                        </div></a></div>
+                <div class="search__results__item"><a class="results__item__link" href="">
+                        <div class="avatar__container"><img src="/images/user_avatar.jpg"></div>
+                        <div class="info__container">
+                            <p class="info__container__name">username</p>
+                            <p class="info__container__nickname">nickname</p>
+                        </div></a></div>
+            </div>
             <div class="menu__items">
                 <?php if (!Yii::$app->user->isGuest):?>
 
@@ -63,7 +101,7 @@ AppAsset::register($this);
                             <input class="search__btn" type="submit">
                         </form>
                     </div>
-                    <a class="menu__item_link menu__item_lang" href="/lang">RU</a>
+                    <a class="menu__item_link menu__item_lang" href="" data-lang="<?= (Yii::$app->language == 'en') ? 'ru' : 'en'?>"><?= strtoupper(Yii::$app->language)?></a>
                     <?php if (!Yii::$app->user->isGuest):?>
                         <span class="menu__item_link menu__item_logout">
                              <?= Html::beginForm(['/user/default/logout'], 'post'); ?>

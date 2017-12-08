@@ -54,7 +54,7 @@ class ProfileController extends Controller
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-        return $this->redirect(['/user/profile/view/', 'nickname' => $user->getNickname()]);
+        return $this->redirect(['/user/profile/view/', 'nickname' => $currentUser->getNickname()]);
     }
 
     public function actionUnsubscribe($id)
@@ -65,11 +65,9 @@ class ProfileController extends Controller
         /** @var  $currentUser  User */
         $currentUser = Yii::$app->user->identity;
         $user = $this->findUserById($id);
-
-
         $currentUser->unFollow($user);
 
-        return $this->redirect(['/user/profile/view/', 'nickname' => $user->getNickname()]);
+        return $this->redirect(['/user/profile/view/', 'nickname' => $currentUser->getNickname()]);
     }
 
     /**

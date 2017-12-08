@@ -9,8 +9,6 @@ use yii\helpers\Html;
 
 
 ?>
-<h2>edit</h2>
-
 <section class="edit">
     <div class="container">
         <div class="edit__wrapper wrapper__left">
