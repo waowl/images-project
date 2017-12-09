@@ -9,6 +9,7 @@
 namespace frontend\modules\user\controllers;
 
 
+use frontend\models\Post;
 use frontend\models\User;
 use frontend\modules\user\models\EditForm;
 use frontend\modules\user\models\form\PictureForm;
@@ -29,6 +30,7 @@ class ProfileController extends Controller
 
     public function actionView($nickname)
     {
+
         $currentUser = Yii::$app->user->identity;
         if ($currentUser) {
             $picture = new PictureForm();

@@ -30,6 +30,9 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="single__info">
+                <div class="single__delete">
+                    <a href="<?= Url::to('/post/delete/' . $post->id)?>" class="btn-filled btn-delete">Delete post</a>
+                </div>
                 <div class="single__info__author"><img class="author_avatar" src="<?= $post->user->getPicture() ?>"><span class="author__nickname"><?=  Html::encode($post->user->nickname ? $post->user->nickname : $post->user->username) ?> </span></div>
                 <p class="single__info__title"><?= Html::encode($post->description)?></p>
                 <div class="single__info__actvity">
@@ -59,7 +62,9 @@ use yii\helpers\Url;
                                 </div>
 
                                 <p class="comment__body"><?= Html::encode($comment->comment) ?></p>
-                                    <?php if ($currentUser->equals($comment->user)):?>
+
+
+                                <?php if ($currentUser->equals($comment->user) ||  ($currentUser->getId() === $post->user_id)):?>
                                         <div class="comment__actions">
                                             <a href="<?= Url::to('/comment/delete/'. $comment->id )?> " class="comment__action action__delete">Удалить</a>
                                             <a href="" data-id = "<?= $comment->id  ?> "class="comment__action action__edit">Изменить</a>

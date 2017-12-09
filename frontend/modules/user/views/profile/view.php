@@ -128,7 +128,11 @@ $this->title = Yii::t('profile', 'Profile') .' | '. Html::encode($user->username
                         <div class="recommended__item_name"><?= $follower->username?>
                             <p class="recommended__item_nickname">@<?= $follower->nickname?> </p>
                         </div>
-                    </div><a class="btn-invert recommended__follow" href="<?= Url::to(['/user/profile/subscribe', 'id' => $follower->id]); ?>">Follow</a>
+                        <?php if ($currentUser->checkSubscription($follower)):?>
+                        </div><a class="btn-invert recommended__follow" href="<?= Url::to(['/user/profile/unsubscribe', 'id' => $follower->id]); ?>">Unfollow</a>
+                        <?php else:?>
+                            </div><a class="btn-invert recommended__follow" href="<?= Url::to(['/user/profile/subscribe', 'id' => $follower->id]); ?>">Follow</a>
+                        <?php endif;?>
                 </div>
 
             <?php endforeach; ?>

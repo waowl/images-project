@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use frontend\models\events\FollowEvent;
 use Yii;
 use yii\base\Exception;
 use yii\base\NotSupportedException;
@@ -32,7 +33,8 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
-
+    const EVENT_FOLLOW = 'follow';
+    const EVENT_UNFOLLOW = 'unfollow';
 
     const SCENARIO_EDIT = 'edit';
 
@@ -40,7 +42,11 @@ class User extends ActiveRecord implements IdentityInterface
 
     const DEFAULT_AVATAR = "/img/no-img.jpg";
 
-
+    public function __construct()
+    {
+        $this->on(self::EVENT_FOLLOW, [Yii::$app->feedService, 'addNewFollowed']);
+        $this->on(self::EVENT_UNFOLLOW, [Yii::$app->feedService, 'removeUnfollowed']);
+    }
     public function scenarios()
     {
         return [
@@ -223,10 +229,15 @@ class User extends ActiveRecord implements IdentityInterface
         if ($this->getId() !== $user->getId()) {
             $k1 = "user:{$this->getId()}:subscriptions";
             $k2 = "user:{$user->getId()}:followers";
-            print_r($posts); die;
+
             $redis = Yii::$app->redis;
             $redis->sadd($k1, $user->getId());
             $redis->sadd($k2, $this->getId());
+
+            $event =  new FollowEvent();
+            $event->userId = $this->getId();
+            $event->followedId = $user->getId();
+            $this->trigger(self::EVENT_FOLLOW, $event);
         } else {
             throw new Exception('Подписка на самого себя невозможна!');
         }
@@ -241,6 +252,11 @@ class User extends ActiveRecord implements IdentityInterface
         $redis = Yii::$app->redis;
         $redis->srem($k1, $user->getId());
         $redis->srem($k2, $this->getId());
+
+        $event =  new FollowEvent();
+        $event->userId = $this->getId();
+        $event->followedId = $user->getId();
+        $this->trigger(self::EVENT_UNFOLLOW, $event);
     }
 
     /**

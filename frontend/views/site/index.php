@@ -7,8 +7,7 @@
 use yii\web\JqueryAsset;
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\helpers\HtmlPurifier;
-
+use frontend\components\widgets\RecommendedWidget;
 $this->title = 'Newsfeed';
 ?>
 
@@ -87,43 +86,7 @@ $this->title = 'Newsfeed';
                     <?php endif; ?>
                 </div>
 
-                <section class="recommended">
-                    <div class="recommended__header">
-                        <p class="recommended__title">Recommended</p>
-                    </div>
-                    <div class="recommended__item">
-                        <div class="recommended__item_info">
-                            <div class="recommended__item_avatar"><img src="images/recommended.jpg"></div>
-                            <a class="recommended__item_name" href="user/">Erick Frei
-                                <p class="recommended__item_nickname">@supererick</p></a>
-                        </div>
-                        <a class="btn-invert recommended__follow" href="follow">Follow</a>
-                    </div>
-                    <div class="recommended__item">
-                        <div class="recommended__item_info">
-                            <div class="recommended__item_avatar"><img src="images/recommended.jpg"></div>
-                            <a class="recommended__item_name" href="user/">Erick Frei
-                                <p class="recommended__item_nickname">@supererick</p></a>
-                        </div>
-                        <a class="btn-invert recommended__follow" href="follow">Follow</a>
-                    </div>
-                    <div class="recommended__item">
-                        <div class="recommended__item_info">
-                            <div class="recommended__item_avatar"><img src="images/recommended.jpg"></div>
-                            <a class="recommended__item_name" href="user/">Erick Frei
-                                <p class="recommended__item_nickname">@supererick</p></a>
-                        </div>
-                        <a class="btn-invert recommended__follow" href="follow">Follow</a>
-                    </div>
-                    <div class="recommended__item">
-                        <div class="recommended__item_info">
-                            <div class="recommended__item_avatar"><img src="images/recommended.jpg"></div>
-                            <a class="recommended__item_name" href="user/">Erick Frei
-                                <p class="recommended__item_nickname">@supererick</p></a>
-                        </div>
-                        <a class="btn-invert recommended__follow" href="follow">Follow</a>
-                    </div>
-                </section>
+                <?= RecommendedWidget::widget(); ?>
             </div>
         </div>
     </section>
