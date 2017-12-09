@@ -58,6 +58,14 @@ class DefaultController extends Controller
         throw new NotFoundException();
     }
 
+    public function actionDelete($id)
+    {
+        $post = $this->findPost($id);
+        if ($post->delete()) {
+            return $this->redirect('/');
+        }
+    }
+
 
     /**
      * @return array|string|Response

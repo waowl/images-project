@@ -24,7 +24,13 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
-
+    public function beforeDelete()
+    {
+        Yii::$app->storage->deletePicture($this->filename);
+        Comment::deleteAll(['post_id' => $this->getId()]);
+        Feed::findOne(['post_id'=> $this->getId()]);
+        return parent::beforeDelete();
+    }
 
     /**
      * @inheritdoc

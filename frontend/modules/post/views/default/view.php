@@ -30,9 +30,11 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="single__info">
-                <div class="single__delete">
-                    <a href="<?= Url::to('/post/delete/' . $post->id)?>" class="btn-filled btn-delete">Delete post</a>
-                </div>
+                <?php if ($currentUser->getId() === $post->user_id):?>
+                    <div class="single__delete">
+                        <a href="<?= Url::to('/post/delete/' . $post->id)?>" class="btn-filled btn-delete">Delete post</a>
+                    </div>
+                <?php endif;?>
                 <div class="single__info__author"><img class="author_avatar" src="<?= $post->user->getPicture() ?>"><span class="author__nickname"><?=  Html::encode($post->user->nickname ? $post->user->nickname : $post->user->username) ?> </span></div>
                 <p class="single__info__title"><?= Html::encode($post->description)?></p>
                 <div class="single__info__actvity">

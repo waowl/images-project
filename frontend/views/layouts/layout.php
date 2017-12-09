@@ -23,7 +23,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <body>
 <div class="wrapper">
-    <section class="menu">
+    <section class="menu" id="menu">
         <div class="container menu__container">
             <div class="search__results hidden">
 
