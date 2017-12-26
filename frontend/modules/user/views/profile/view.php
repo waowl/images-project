@@ -20,7 +20,7 @@ $this->title = Yii::t('profile', 'Profile') .' | '. Html::encode($user->username
             <div class="main__user">
                 <div class="main__user_avatar">
                     <div class="user_avatar__container">
-                        <img src="<?= $user->getPicture(); ?>">
+                        <img data-img src="<?= $user->getPicture(); ?>">
                     </div>
                 </div>
                 <div class="main__user_description">
@@ -50,7 +50,10 @@ $this->title = Yii::t('profile', 'Profile') .' | '. Html::encode($user->username
 
                 <div class="main__user_info">
                     <div class="user__posts"><span class="count"><?= $user->getPostCount(); ?></span>
-                        <p class="info_title"><?= Yii::t('profile', 'Posts') ?></p>
+                        <p class="info_title"><?php
+                            echo  Yii::t('profile',  '{n, plural, =0{Posts} =1{Posts} other{Posts}}',
+                                 ['n' => $user->getPostCount()]);
+                            ?></p>
                     </div>
                     <div class="user__followers"><span class="count"><?= $user->getFollowersCount('subscriptions'); ?></span>
                         <p><a class="info_title" href="#followers-modal"><?= Yii::t('profile', 'Followers') ?></a></p>
@@ -76,7 +79,7 @@ $this->title = Yii::t('profile', 'Profile') .' | '. Html::encode($user->username
 
                             <div class="post_item">
                                 <a href="<?= Url::to('/post/' . $post->id)?> ">
-                                    <img src="<?= $post->getImage(); ?>">
+                                    <img data-img src="<?= $post->getImage(); ?>">
                                     <div class="post__item__overlay">
                                         <div class="overlay__content">
                                             <div class="post_comments">

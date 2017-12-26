@@ -7,6 +7,7 @@ use dosamigos\fileupload\FileUpload;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
+$this->title = Yii::t('edit-profile', 'Edit profile');
 
 ?>
 <section class="edit">
@@ -18,7 +19,7 @@ use yii\helpers\Html;
                 </div>
                 <?php if ($currentUser && $currentUser->equals($user)): ?>
                     <div class="btn-edit__group">
-                        <label for="pictureform-picture" class="label-relative btn-edit"> Change Image
+                        <label for="pictureform-picture" class="label-relative btn-edit"><?= Yii::t('edit-profile', 'Change Image'); ?>
                             <div id="hide">
                                 <?=
                                 FileUpload::widget([
@@ -43,7 +44,7 @@ use yii\helpers\Html;
                             </div>
 
                         </label>
-                        <a class="btn-edit" href="/user/profile/delete-picture">Delete Image</a>
+                        <a class="btn-edit" href="/user/profile/delete-picture"><?= Yii::t('edit-profile', 'Delete Image')?> </a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -51,7 +52,7 @@ use yii\helpers\Html;
                 <div class="edit__form__wrapper">
                     <?php $form = ActiveForm::begin()?>
                     <div class="edit__field">
-                        <label for="namefield">Name</label><br>
+                        <label for="namefield"><?= Yii::t('edit-profile', 'Name')?></label><br>
                         <?= $form->field($user, 'username', [
                             'inputOptions'=>[
                                 'class'=>'',
@@ -59,7 +60,7 @@ use yii\helpers\Html;
                         ])->label(false)?>
                     </div>
                     <div class="edit__field">
-                        <label for="namefield">Nickname</label><br>
+                        <label for="namefield"><?= Yii::t('edit-profile', 'Nickname')?></label><br>
                         <?= $form->field($user, 'nickname',[
                             'inputOptions'=>[
                                 'class'=>'',
@@ -68,14 +69,14 @@ use yii\helpers\Html;
                     </div>
 
                     <div class="edit__field">
-                        <label for="namefield">About</label><br>
+                        <label for="namefield"><?= Yii::t('edit-profile', 'About')?></label><br>
                         <?= $form->field($user, 'about', [
                             'inputOptions'=>[
                                 'class'=>'',
                             ]
                         ])->label(false)?>
                     </div>
-                    <?= Html::submitButton('Save Changes', ['class' => 'btn-filled btn-save', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton( Yii::t('edit-profile', 'Save Changes'), ['class' => 'btn-filled btn-save', 'name' => 'signup-button']) ?>
                     <?php ActiveForm::end()?>
 
                 </div>

@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+$this->title = Yii::t('login', 'Login');
 ?>
 <section class="login">
     <div class="login__wrapper">
@@ -20,23 +20,23 @@ $this->title = 'Login';
                 <?= $form->field($model, 'email',  [
                     'inputOptions'=>[
                         'class'=>'form__field email__field',
-                        'placeholder'=>'Enter your email'
+                        'placeholder'=> Yii::t('login', 'Enter your email')
                     ]
                 ])->textInput()->label(false) ?>
 
                 <?= $form->field($model, 'password',  [
                     'inputOptions'=>[
                         'class'=>'form__field email__field',
-                        'placeholder'=>'Enter your password'
+                        'placeholder'=> Yii::t('login', 'Enter your password')
                     ]
                 ])->passwordInput()->label(false) ?>
 
-                <?= Html::submitButton('Login', ['class' => 'btn-filled btn-signin', 'name' => 'login-button']) ?>
-                <span>OR</span><a class="btn-filled btn-fb" href="/user/default/auth?authclient=facebook"><img src="/images/fb_ico.png"><span>Login with Facebook</span></a>
+                <?= Html::submitButton(Yii::t('login', 'Login'), ['class' => 'btn-filled btn-signin', 'name' => 'login-button']) ?>
+                <span><?= Yii::t('login', 'OR')?></span><a class="btn-filled btn-fb" href="/user/default/auth?authclient=facebook"><img src="/images/fb_ico.png"><span><?= Yii::t('login', 'Login with Facebook ')?> </span></a>
 
                 <?php ActiveForm::end(); ?>
             </div>
         </div>
-        <div class="login__bottom"><?= Html::a('Forgot password?', ['/user/default/request-password-reset'],  ['class'=> "login__bottom_link"]) ?><span>No account? &nbsp;<?= Html::a('Sign Up!', ['/user/default/signup'], ['class'=> "login__bottom_link"]) ?></span></div>
+        <div class="login__bottom"><?= Html::a(Yii::t('login', 'Fogot password?'), ['/user/default/request-password-reset'],  ['class'=> "login__bottom_link"]) ?><span><?= Yii::t('login', 'No account?') ?>  &nbsp;<?= Html::a(Yii::t('login', 'Sign up!'), ['/user/default/signup'], ['class'=> "login__bottom_link"]) ?></span></div>
     </div>
 </section>

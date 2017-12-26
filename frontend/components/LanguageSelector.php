@@ -24,11 +24,10 @@ class LanguageSelector implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        if (!Yii::$app->user->isGuest){
             $cookieLanguage = $app->request->cookies['language'];
             if (isset($cookieLanguage) && in_array($cookieLanguage, $this->supportedLanguages)) {
                 $app->language = $cookieLanguage;
-            }
+
         }
     }
 }

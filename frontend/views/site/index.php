@@ -8,27 +8,28 @@ use yii\web\JqueryAsset;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use frontend\components\widgets\RecommendedWidget;
-$this->title = 'Newsfeed';
+$this->title = Yii::t('feed', 'News feed');
 ?>
 
 
     <section class="feed">
         <div class="container">
+            <div class="alert__wrapper hidden" >
+                <div class="alert alert__success">
+                    <div class="alert__body">Your complaint was sent!</div>
+                </div>
+            </div>
             <div class="feed__wrapper">
                 <div class="feed__items">
                     <?php if ($feedItems): ?>
                         <?php foreach ($feedItems as $feedItem): ?>
                             <?php /* @var $feedItem Feed */ ?>
                             <div class="feed__item">
-                                <div class="alert__wrapper">
-                                    <div class="alert alert__success">
-                                        <div class="alert__body">Your complaint was sent!</div>
-                                    </div>
-                                </div>
+
                                 <div class="feed__item_top"><a href="<?= Url::to([
                                         '/user/profile/view',
                                         'nickname' => ($feedItem->author_nickname) ? $feedItem->author_nickname : $feedItem->author_id
-                                    ]); ?>"><img class="feed__item_author_avatar"
+                                    ]); ?>"><img data-img class="feed__item_author_avatar"
                                                  src="<?= $feedItem->author_picture; ?>"><span
                                                 class="feed__item_author"><?= Html::encode($feedItem->author_name); ?> </span></a><a
                                             href="<?= Url::to(['/post/default/view', 'id' => $feedItem->post_id]); ?> ">
@@ -38,7 +39,7 @@ $this->title = 'Newsfeed';
                                         '/post/default/view',
                                         'id' => $feedItem->post_id
                                     ]); ?>"><img
-                                                src="<?= Yii::$app->storage->getFile($feedItem->post_filename); ?>"></a>
+                                                 src="<?= Yii::$app->storage->getFile($feedItem->post_filename); ?>"></a>
                                 </div>
                                 <div class="feed__item_bottom">
                                     <div class="bottom__activity">
@@ -68,11 +69,11 @@ $this->title = 'Newsfeed';
                                     <?php if (!$feedItem->isReported($currentUser)): ?>
                                         <div class="bottom__complain"><a class="btn-filled button-complain" href="#"
                                                                          data-id="<?= $feedItem->post_id?>">
-                                                Complain</a>
+                                                <?= Yii::t('feed', 'Complain')?> </a>
                                         </div>
 
                                     <?php else: ?>
-                                        <div class="bottom__complain"><p>Post has been reported.</p></div>
+                                        <div class="bottom__complain"><p><?= Yii::t('feed', 'Post has been reported.')?></p></div>
                                     <?php endif; ?>
 
                                 </div>

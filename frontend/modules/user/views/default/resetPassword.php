@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Reset password';
+$this->title = Yii::t('request', 'Reset Password');
 ?>
 
 <section class="login">
@@ -20,11 +20,11 @@ $this->title = 'Reset password';
                 <?= $form->field($model, 'password', [
                     'inputOptions'=>[
                         'class'=>'form__field email__field',
-                        'placeholder'=>'Enter your new password'
+                        'placeholder'=> Yii::t('request', 'Enter your new password')
                     ]
                 ])->textInput(['autofocus' => true])->label(false)  ?>
 
-                <?= Html::submitButton('Send', ['class' => 'btn-filled btn-signup']) ?>
+                <?= Html::submitButton(Yii::t('request', 'Save'), ['class' => 'btn-filled btn-signup']) ?>
 
                 <?php ActiveForm::end(); ?>
 

@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = Yii::t('signup', 'Sign Up');
 ?>
 <section class="login">
     <div class="login__wrapper">
@@ -19,26 +19,26 @@ $this->title = 'Signup';
                 <?= $form->field($model, 'username',  [
                     'inputOptions'=>[
                         'class'=>'form__field email__field',
-                        'placeholder'=>'Enter your username'
+                        'placeholder'=>Yii::t('signup', 'Enter your username')
                     ]
                 ])->textInput(['autofocus' => true])->label(false)  ?>
 
                 <?= $form->field($model, 'email',  [
                     'inputOptions'=>[
                         'class'=>'form__field email__field',
-                        'placeholder'=>'Enter your email'
+                        'placeholder'=> Yii::t('signup', 'Enter your email')
                     ]
                 ])->label(false)  ?>
 
                 <?= $form->field($model, 'password',  [
                     'inputOptions'=>[
                         'class'=>'form__field password__field',
-                        'placeholder'=>'Enter your password'
+                        'placeholder'=>Yii::t('signup', 'Enter your password')
                     ]
                 ])->passwordInput()->label(false)  ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn-filled btn-signup', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton(Yii::t('signup', 'Sign Up'), ['class' => 'btn-filled btn-signup', 'name' => 'signup-button']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>
