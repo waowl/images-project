@@ -24,6 +24,9 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
+    /**
+     * delete related data before deleting post.
+     */
     public function beforeDelete()
     {
         Yii::$app->storage->deletePicture($this->filename);
@@ -64,6 +67,7 @@ class Post extends \yii\db\ActiveRecord
     public function commentsCount() {
         return $this->hasMany(Comment::className(), ['post_id' => 'id'])->count();
     }
+
     public function like(User $user)
     {
         $redis = Yii::$app->redis;

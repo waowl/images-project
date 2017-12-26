@@ -9,6 +9,7 @@
 return [
   'News feed' => 'Моя лента',
   'Complain' => 'Пожаловаться',
+  'Posted' => 'Опубликованно',
   'Post has been reported.' => 'Жалоба на рассмотрении',
 
 ];

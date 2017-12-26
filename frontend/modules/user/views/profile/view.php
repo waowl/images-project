@@ -51,15 +51,21 @@ $this->title = Yii::t('profile', 'Profile') .' | '. Html::encode($user->username
                 <div class="main__user_info">
                     <div class="user__posts"><span class="count"><?= $user->getPostCount(); ?></span>
                         <p class="info_title"><?php
-                            echo  Yii::t('profile',  '{n, plural, =0{Posts} =1{Posts} other{Posts}}',
+                            echo  Yii::t('profile',  '{n, plural, =0{Posts} =1{Post} other{Posts}}',
                                  ['n' => $user->getPostCount()]);
                             ?></p>
                     </div>
-                    <div class="user__followers"><span class="count"><?= $user->getFollowersCount('subscriptions'); ?></span>
-                        <p><a class="info_title" href="#followers-modal"><?= Yii::t('profile', 'Followers') ?></a></p>
+                    <div class="user__followers"><span class="count"><?= $user->getFollowersCount(); ?></span>
+                        <p><a class="info_title" href="#followers-modal"><?php
+                                echo  Yii::t('profile',  '{n, plural, =0{Followers} =1{Follower} other{Followers}}',
+                                    ['n' => $user->getFollowersCount()]);
+                                ?></a></p>
                     </div>
                     <div class="user__following"><span class="count"><?= $user->getSubscriptionsCount(); ?></span>
-                        <p><a class="info_title" href="#following-modal"><?= Yii::t('profile', 'Following') ?></a></p>
+                        <p><a class="info_title" href="#following-modal"><?php
+                                echo  Yii::t('profile',  '{n, plural, =0{Following} =1{Following} other{Following}}',
+                                    ['n' => $user->getSubscriptionsCount()]);
+                                ?></a></p>
                     </div>
                 </div>
             </div>

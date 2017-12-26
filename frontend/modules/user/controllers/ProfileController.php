@@ -7,11 +7,8 @@
  */
 
 namespace frontend\modules\user\controllers;
-
-
-use frontend\models\Post;
 use frontend\models\User;
-use frontend\modules\user\models\EditForm;
+use frontend\modules\user\models\form\EditForm;
 use frontend\modules\user\models\form\PictureForm;
 use PHPUnit\Runner\Exception;
 use Yii;
@@ -22,11 +19,6 @@ use yii\web\UploadedFile;
 
 class ProfileController extends Controller
 {
-    // TODO: check will be uploading work?
-   /* public function beforeAction($action) {
-        $this->enableCsrfValidation = ($action->id !== "upload-picture");
-        return parent::beforeAction($action);
-    }*/
 
     public function actionView($nickname)
     {
@@ -92,7 +84,6 @@ class ProfileController extends Controller
      * @return User
      * @throws NotFoundHttpException
      */
-
     private function findUser($nickname)
     {
         if ($user = User::find()->where(['nickname' => $nickname])->orWhere(['id' => $nickname])->one()) {

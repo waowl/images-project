@@ -62,7 +62,7 @@ $this->title = Yii::t('feed', 'News feed');
                                         <span class="comment__count"><?= $feedItem->commentsCount() ?> </span>`
                                     </div>
                                     <div class="bottom__date">
-                                        <p>Posted:<span
+                                        <p><?= Yii::t('feed', 'Posted')?>:<span
                                                     class="date"><?= Yii::$app->formatter->asDatetime($feedItem->post_created_at); ?></span>
                                         </p>
                                     </div>

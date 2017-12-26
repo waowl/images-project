@@ -38,19 +38,20 @@ class User extends ActiveRecord implements IdentityInterface
 
     const SCENARIO_EDIT = 'edit';
 
-
-
     const DEFAULT_AVATAR = "/img/no-img.jpg";
 
     public function __construct()
     {
         $this->on(self::EVENT_FOLLOW, [Yii::$app->feedService, 'addNewFollowed']);
         $this->on(self::EVENT_UNFOLLOW, [Yii::$app->feedService, 'removeUnfollowed']);
+
     }
+
     public function scenarios()
     {
         return [
             self::SCENARIO_EDIT => ['username', 'nickname', 'about'],
+            self::SCENARIO_DEFAULT => ['name', 'email'],
 
         ];
     }
@@ -81,7 +82,6 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-            [['username', 'nickname', 'about'], 'required', 'on' => self::SCENARIO_EDIT],
         ];
     }
 

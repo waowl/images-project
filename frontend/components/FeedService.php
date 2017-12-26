@@ -15,6 +15,10 @@ use yii\base\Event;
 
 class FeedService
 {
+    /**
+     * add new post to follower's feed
+     * @param Event $event
+     */
     public function addToFeeds(Event $event)
     {
         $user = $event->getUser();
@@ -36,6 +40,10 @@ class FeedService
         }
     }
 
+    /**
+     * add old post to  feed of new follower
+     * @param Event $event
+     */
     public function  addNewFollowed(Event $event)
     {
         $userId  = $event->getUserId();
@@ -57,6 +65,10 @@ class FeedService
 
     }
 
+    /**
+     * remove posts from  feed of all followers
+     * @param Event $event
+     */
     public function removeUnfollowed(Event $event)
     {
         $userId  = $event->getUserId();
