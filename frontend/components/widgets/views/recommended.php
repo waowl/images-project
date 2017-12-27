@@ -22,7 +22,7 @@ use yii\helpers\Url;
                     <a class="recommended__item_name" href="<?= Url::to('/profile/' . $item['id'])?> "><?= $item['username']?>
                         <p class="recommended__item_nickname"><?= $item['nickname']?> </p></a>
                 </div>
-                <a class="btn-invert recommended__follow" href="follow">Follow</a>
+                <a class="btn-invert recommended__follow" href="<?= Url::to(['/user/profile/subscribe', 'id' => $item['id']]); ?>">Follow</a>
             </div>
         <?php endforeach; ?>
     <?php endif;?>
