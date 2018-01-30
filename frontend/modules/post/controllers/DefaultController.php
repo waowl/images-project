@@ -117,14 +117,11 @@ class DefaultController extends Controller
     {
         $model = new CommentForm(Yii::$app->user->identity);
 
-        if (Yii::$app->request->isPost) {
-            if ($model->load(Yii::$app->request->post())) {
-                if ($model->save($id)) {
+        if (Yii::$app->request->isPost &&
+            ($model->load(Yii::$app->request->post())) && ($model->save($id))) {
                     Yii::$app->session->setFlash('success', 'Комментарий добавлен');
-                    return $this->redirect(['/post/' . $id]);
+                    return $this->redirect(['/post/default/view', 'id' =>  $id]);
                 }
-            }
-        }
     }
 
     public function actionCommentDelete($id)

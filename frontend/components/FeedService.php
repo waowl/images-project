@@ -41,7 +41,7 @@ class FeedService
     }
 
     /**
-     * add old post to  feed of new follower
+     * add old post to new follower's  feed
      * @param Event $event
      */
     public function  addNewFollowed(Event $event)
@@ -66,7 +66,7 @@ class FeedService
     }
 
     /**
-     * remove posts from  feed of all followers
+     * remove  all post from follower's  feed
      * @param Event $event
      */
     public function removeUnfollowed(Event $event)

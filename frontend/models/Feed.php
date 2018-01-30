@@ -47,7 +47,8 @@ class Feed extends \yii\db\ActiveRecord
         ];
     }
     /**
-     * @return mixed
+     *  get post's likes count
+     * @return int
      */
     public function likesCount()
     {
@@ -57,7 +58,8 @@ class Feed extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return mixed
+     *  get post's comments count
+     * @return int
      */
     public function commentsCount()
     {
@@ -65,6 +67,11 @@ class Feed extends \yii\db\ActiveRecord
         return  $post->commentsCount();
     }
 
+    /**
+     * check is this post reported
+     * @param User $user
+     * @return boolean
+     */
     public function isReported(User $user)
     {
         $redis = Yii::$app->redis;

@@ -40,6 +40,10 @@ class CommentForm extends Model
         $this->user = $user;
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function save($id)
     {
         if ($this->validate()) {
@@ -52,6 +56,10 @@ class CommentForm extends Model
         }
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function update($id)
     {
         $comment = Comment::findOne($id);

@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\modules\post\models\forms;
 
 use frontend\models\Post;
@@ -20,12 +21,14 @@ class PostForm extends Model
     {
         return [
             [
-                ['filename'], 'file',
+                ['filename'],
+                'file',
                 'skipOnEmpty' => true,
                 'extensions' => ['jpg', 'png'],
                 'checkExtensionByMimeType' => true,
-                'maxSize' => $this->getMaxSize()],
-                [['description'], 'string', 'max' => self::MAX_DESCRIPTION_LENGTH]
+                'maxSize' => $this->getMaxSize()
+            ],
+            [['description'], 'string', 'max' => self::MAX_DESCRIPTION_LENGTH]
 
         ];
     }
@@ -38,21 +41,22 @@ class PostForm extends Model
 
     public function save()
     {
-            if ($this->validate()) {
-                $post = new Post();
-                $post->description = $this->description;
-                $post->created_at = time();
-                $post->filename = Yii::$app->storage->saveUploadedFile($this->filename);
-                $post->user_id = $this->user->getId();
-                if($post->save(false)) {
-                    $event = new PostCreatedEvent();
-                    $event->user = $this->user;
-                    $event->post = $post;
-                    $this->trigger(self::EVENT_POST_CREATED, $event);
-                    return true;
-                }
-            }
+        if (!$this->validate()) {
             return false;
+        }
+        $post = new Post();
+        $post->description = $this->description;
+        $post->created_at = time();
+        $post->filename = Yii::$app->storage->saveUploadedFile($this->filename);
+        $post->user_id = $this->user->getId();
+        if ($post->save(false)) {
+            $event = new PostCreatedEvent();
+            $event->user = $this->user;
+            $event->post = $post;
+            $this->trigger(self::EVENT_POST_CREATED, $event);
+            return true;
+        }
+        return false;
     }
 
     private function getMaxSize()

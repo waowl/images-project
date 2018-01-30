@@ -66,12 +66,18 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->on(self::EVENT_AFTER_UPDATE, [ $this,'saveRoles']);
     }
-    
+
+    /**
+     *
+     */
     public function afterFind()
     {
         $this->roles = $this->getRoles();
     }
 
+    /**
+     *
+     */
     public function saveRoles()
     {
         Yii::$app->authManager->revokeAll($this->getId());

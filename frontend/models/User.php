@@ -8,6 +8,7 @@ use yii\base\Exception;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\web\ForbiddenHttpException;
 use yii\web\IdentityInterface;
 
 /**
@@ -217,6 +218,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * get user nickname
      * @return mixed
      */
     public function getNickname()
@@ -224,6 +226,11 @@ class User extends ActiveRecord implements IdentityInterface
         return ($this->nickname) ? $this->nickname : $this->id;
     }
 
+    /**
+     * follow user
+     * @param User $user
+     * @throws ForbiddenHttpException
+     */
     public function follow(User $user)
     {
         if ($this->getId() !== $user->getId()) {
@@ -239,11 +246,15 @@ class User extends ActiveRecord implements IdentityInterface
             $event->followedId = $user->getId();
             $this->trigger(self::EVENT_FOLLOW, $event);
         } else {
-            throw new Exception('Подписка на самого себя невозможна!');
+            throw new ForbiddenHttpException('Подписка на самого себя невозможна!');
         }
 
     }
 
+    /**
+     *  delete whether  user from following list
+     * @param User $user
+     */
     public function unFollow(User $user)
     {
         $k1 = "user:{$this->getId()}:subscriptions";
@@ -259,9 +270,10 @@ class User extends ActiveRecord implements IdentityInterface
         $this->trigger(self::EVENT_UNFOLLOW, $event);
     }
 
+
     /**
-     *
-     * @return mixed
+     *  get followers
+     * @return array
      */
     public function getFollowers()
     {
@@ -272,8 +284,8 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     *
-     * @return mixed
+     * get following count
+     * @return int
      */
     public function getSubscriptions()
     {
@@ -284,18 +296,32 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
+    /**
+     * get followers count
+     * @return int
+     */
     public function getFollowersCount()
     {
         $redis = Yii::$app->redis;
         return $redis->scard("user:{$this->getId()}:followers");
     }
 
+
+    /**
+     * get subscription count
+     * @return int
+     */
     public function getSubscriptionsCount()
     {
         $redis = Yii::$app->redis;
         return $redis->scard("user:{$this->getId()}:subscriptions");
     }
 
+    /**
+     * get mutual subscriptions with whether user
+     * @param User $user
+     * @return array|User[]|ActiveRecord[]
+     */
     public function getMutualSubscriptons(User $user)
     {
         $k1 = "user:{$this->getId()}:subscriptions";
@@ -308,6 +334,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * check this user in subscriptions
      * @param User $user
      * @return boolean
      */
@@ -344,11 +371,17 @@ class User extends ActiveRecord implements IdentityInterface
         return false;
     }
 
+    /**
+     * get feed items
+     * @param int $limit
+     * @return array|User[]|ActiveRecord[]
+     */
     public function getFeed(int $limit)
     {
         $order = ['post_created_at' => SORT_DESC];
         return $this->hasMany(Feed::className(), ['user_id' => 'id'])->orderBy($order)->limit($limit)->all();
     }
+
     /**
      * Check whether current user likes post with given id
      * @param integer $postId

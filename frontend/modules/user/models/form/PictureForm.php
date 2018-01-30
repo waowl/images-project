@@ -19,6 +19,9 @@ class PictureForm extends Model
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'resizePicture']);
     }
 
+    /**
+     * resize picture before save
+     */
     public function resizePicture()
     {
         $width = Yii::$app->params['picture']['width'];
@@ -32,6 +35,7 @@ class PictureForm extends Model
             $constraint->upsize();
         })->save();
     }
+
     public function rules()
     {
         return [
@@ -42,8 +46,6 @@ class PictureForm extends Model
             ],
         ];
     }
-
-
 
     public function save()
     {

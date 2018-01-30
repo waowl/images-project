@@ -7,6 +7,8 @@
  */
 namespace frontend\models\events;
 
+use frontend\models\Post;
+use frontend\models\User;
 use yii\base\Event;
 
 class PostCreatedEvent extends Event
@@ -16,7 +18,7 @@ class PostCreatedEvent extends Event
     public $post;
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getUser()
     {
@@ -24,7 +26,7 @@ class PostCreatedEvent extends Event
     }
 
     /**
-     * @return mixed
+     * @return Post
      */
     public function getPost()
     {

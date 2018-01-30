@@ -24,6 +24,10 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
+    /**
+     * find post's complaints
+     * @return $this
+     */
     public static function findComplaints() {
         return self::find()->where('complaints > 0')->orderBy('complaints DESC');
     }
@@ -44,11 +48,20 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     *  get post's picture
+     * @return string
+     */
     public function getImage()
     {
         return Yii::$app->storage->getFile($this->filename);
     }
 
+
+    /**
+     * approve a post
+     * @return bool
+     */
     public function  approve() {
         $redis = Yii::$app->redis;
         $key = "post:$this->id:complaints";
